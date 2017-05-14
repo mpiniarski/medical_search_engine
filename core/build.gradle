@@ -18,5 +18,6 @@ dependencies {
 }
 
 // Define the main class for the application
-mainClassName = 'App'
+mainClassName = 'com.joma.studies.App'
 
+group 'com.joma.studies'
