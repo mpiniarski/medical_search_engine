@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<!DOCTYPE PubmedArticleSet PUBLIC "-//NLM//DTD PubMedArticle, 1st January 2017//EN"
+        "https://dtd.nlm.nih.gov/ncbi/pubmed/out/pubmed_170101.dtd">
+<PubmedArticleSet>
+    <PubmedArticle>
+        <MedlineCitation Status="In-Process" Owner="NLM">
+            <PMID Version="1">28455902</PMID>
+            <DateCreated>
+                <Year>2017</Year>
+                <Month>04</Month>
+                <Day>29</Day>
+            </DateCreated>
+            <DateRevised>
+                <Year>2017</Year>
+                <Month>04</Month>
+                <Day>29</Day>
+            </DateRevised>
+            <Article PubModel="Print-Electronic">
+                <Journal>
+                    <ISSN IssnType="Electronic">2391-5854</ISSN>
+                    <JournalIssue CitedMedium="Internet">
+                        <Volume>51</Volume>
+                        <Issue>1</Issue>
+                        <PubDate>
+                            <Year>2017</Year>
+                            <Month>Feb</Month>
+                            <Day>26</Day>
+                        </PubDate>
+                    </JournalIssue>
+                    <Title>Psychiatria polska</Title>
+                    <ISOAbbreviation>Psychiatr. Pol.</ISOAbbreviation>
+                </Journal>
+                <ArticleTitle>Letter to Editor. Depression and cytokines - a different perspective. Author's response.</ArticleTitle>
+                <Pagination>
+                    <MedlinePgn>153-154</MedlinePgn>
+                </Pagination>
+                <ELocationID EIdType="pii" ValidYN="Y">66788</ELocationID>
+                <ELocationID EIdType="doi" ValidYN="Y">10.12740/PP/66788</ELocationID>
+                <Abstract>
+                    <AbstractText>no summary.</AbstractText>
+                </Abstract>
+                <AuthorList CompleteYN="Y">
+                    <Author ValidYN="Y">
+                        <LastName>Wilkowska</LastName>
+                        <ForeName>Alina</ForeName>
+                        <Initials>A</Initials>
+                        <AffiliationInfo>
+                            <Affiliation>Klinika Psychiatrii Dorosłych GUM w Gdańsku.</Affiliation>
+                        </AffiliationInfo>
+                    </Author>
+                    <Author ValidYN="Y">
+                        <LastName>Landowski</LastName>
+                        <ForeName>Jerzy</ForeName>
+                        <Initials>J</Initials>
+                        <AffiliationInfo>
+                            <Affiliation>Klinika Psychiatrii Dorosłych GUM w Gdańsku.</Affiliation>
+                        </AffiliationInfo>
+                    </Author>
+                </AuthorList>
+                <Language>eng</Language>
+                <Language>pol</Language>
+                <PublicationTypeList>
+                    <PublicationType UI="D016422">Letter</PublicationType>
+                </PublicationTypeList>
+                <VernacularTitle>List do redakcji. Depresja i cytokiny – inne spojrzenie. Odpowiedź autora.
+                </VernacularTitle>
+                <ArticleDate DateType="Electronic">
+                    <Year>2017</Year>
+                    <Month>02</Month>
+                    <Day>26</Day>
+                </ArticleDate>
+            </Article>
+            <MedlineJournalInfo>
+                <Country>Poland</Country>
+                <MedlineTA>Psychiatr Pol</MedlineTA>
+                <NlmUniqueID>0103314</NlmUniqueID>
+                <ISSNLinking>0033-2674</ISSNLinking>
+            </MedlineJournalInfo>
+            <KeywordList Owner="NOTNLM">
+                <Keyword MajorTopicYN="N">cytokines</Keyword>
+                <Keyword MajorTopicYN="N">depression</Keyword>
+            </KeywordList>
+        </MedlineCitation>
+        <PubmedData>
+            <History>
+                <PubMedPubDate PubStatus="entrez">
+                    <Year>2017</Year>
+                    <Month>4</Month>
+                    <Day>30</Day>
+                    <Hour>6</Hour>
+                    <Minute>0</Minute>
+                </PubMedPubDate>
+                <PubMedPubDate PubStatus="pubmed">
+                    <Year>2017</Year>
+                    <Month>4</Month>
+                    <Day>30</Day>
+                    <Hour>6</Hour>
+                    <Minute>0</Minute>
+                </PubMedPubDate>
+                <PubMedPubDate PubStatus="medline">
+                    <Year>2017</Year>
+                    <Month>4</Month>
+                    <Day>30</Day>
+                    <Hour>6</Hour>
+                    <Minute>0</Minute>
+                </PubMedPubDate>
+            </History>
+            <PublicationStatus>ppublish</PublicationStatus>
+            <ArticleIdList>
+                <ArticleId IdType="pubmed">28455902</ArticleId>
+                <ArticleId IdType="pii">66788</ArticleId>
+                <ArticleId IdType="doi">10.12740/PP/66788</ArticleId>
+            </ArticleIdList>
+        </PubmedData>
+    </PubmedArticle>
+</PubmedArticleSet>
