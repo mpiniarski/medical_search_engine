@@ -31,8 +31,7 @@ public class XmlReader implements Observable<ArticleDto> {
         observers.remove(observer);
     }
 
-    @Override
-    public void notifyObservers(ArticleDto articleDto) {
+    private void notifyObservers(ArticleDto articleDto) {
         observers.forEach(a -> a.accept(this, articleDto));
     }
 
