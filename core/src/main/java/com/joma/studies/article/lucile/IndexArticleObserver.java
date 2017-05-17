@@ -13,15 +13,15 @@ import javax.inject.Inject;
 import java.io.IOException;
 
 
-public class IndexArticleListener implements Observer<ArticleDto> {
+public class IndexArticleObserver implements Observer<ArticleDto> {
 
-    private static final Logger logger = Logger.getLogger(IndexArticleListener.class);
+    private static final Logger logger = Logger.getLogger(IndexArticleObserver.class);
 
     private final IndexWriter indexWriter;
     private final ArticleMapper articleMapper;
 
     @Inject
-    public IndexArticleListener(Directory directory, Analyzer analyzer, ArticleMapper articleMapper) throws IOException {
+    public IndexArticleObserver(Directory directory, Analyzer analyzer, ArticleMapper articleMapper) throws IOException {
         this.articleMapper = articleMapper;
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
         indexWriter = new IndexWriter(directory, config);

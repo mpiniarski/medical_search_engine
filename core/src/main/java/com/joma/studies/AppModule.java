@@ -25,7 +25,7 @@ public class AppModule extends AbstractModule {
     }
 
     @Provides
-    public Directory provideDocument(ConfigProvider configProvider) throws IOException {
+    public Directory provideDirectory(ConfigProvider configProvider) throws IOException {
         return FSDirectory.open(
                 Paths.get(configProvider.getIndexDirectory())
         );

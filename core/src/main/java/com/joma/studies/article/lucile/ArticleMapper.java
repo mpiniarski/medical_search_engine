@@ -6,10 +6,14 @@ import org.apache.lucene.document.Field;
 import org.apache.lucene.document.TextField;
 
 public class ArticleMapper {
+
+    private static final String TITLE = "title";
+    private static final String ABSTRACT_TEXT = "abstractText";
+
     public Document toDocument(ArticleDto articleDto){
         Document document = new Document();
-        document.add(new TextField("title", articleDto.getTitle(), Field.Store.YES));
-        document.add(new TextField("abstractText", articleDto.getAbstractText(), Field.Store.YES));
+        document.add(new TextField(TITLE, articleDto.getTitle(), Field.Store.YES));
+        document.add(new TextField(ABSTRACT_TEXT, articleDto.getAbstractText(), Field.Store.YES));
         return document;
     }
 }

@@ -22,7 +22,7 @@ public class XmlReaderTest {
 
     @Before
     public void setUp() throws Exception {
-        xmlReader = new XmlReader();
+        xmlReader = new XmlReader(new ArticleMapper());
         result = new ArrayList<>();
         xmlReader.addObserver((observable, item) -> result.add(item));
     }
