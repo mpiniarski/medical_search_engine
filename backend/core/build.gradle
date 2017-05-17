@@ -7,7 +7,3 @@ repositories {
     jcenter()
 }
 
-dependencies {
-    compile group: 'org.apache.lucene', name: 'lucene-core', version: '6.5.1'
-    testImplementation 'junit:junit:4.12'
-}
