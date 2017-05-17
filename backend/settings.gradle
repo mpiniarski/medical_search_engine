@@ -1,2 +1,2 @@
 rootProject.name = 'medical_search_engine'
-include ':core', ':import'
+include ':core', ':import', ':engine'
