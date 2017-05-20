@@ -22,7 +22,13 @@ public class QueryParser {
         try {
             tokenStream.reset();
             while (tokenStream.incrementToken()) {
-                result.put(charTermAttribute.toString(), 1);
+                String term = charTermAttribute.toString();
+                if (result.containsKey(term)) {
+                    Integer value = result.get(term);
+                    result.replace(term, value, ++value);
+                } else {
+                    result.put(charTermAttribute.toString(), 1);
+                }
             }
             tokenStream.end();
         } catch (IOException e) {
