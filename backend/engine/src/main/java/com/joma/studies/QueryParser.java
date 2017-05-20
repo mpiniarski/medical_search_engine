@@ -2,11 +2,11 @@ package com.joma.studies;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.en.PorterStemFilter;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
 import java.io.IOException;
-import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +16,8 @@ public class QueryParser {
         HashMap<String, Integer> result = new HashMap<>();
 
         Analyzer analyzer = new StandardAnalyzer();
-        TokenStream tokenStream = analyzer.tokenStream("field", new StringReader(query));
+        TokenStream tokenStream = analyzer.tokenStream(null, query);
+        tokenStream = new PorterStemFilter(tokenStream);
         CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
 
         try {
