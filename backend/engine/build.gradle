@@ -20,6 +20,7 @@ repositories {
 }
 
 dependencies {
+    compile group: 'org.apache.lucene', name: 'lucene-core', version: '6.5.1'
     compile project(':core')
     // Use JUnit test framework
     testCompile 'junit:junit:4.12'
