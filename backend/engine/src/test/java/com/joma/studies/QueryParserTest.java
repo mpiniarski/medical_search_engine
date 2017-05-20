@@ -93,11 +93,15 @@ public class QueryParserTest {
         HashMap<String, Integer> expected = new HashMap<>();
         expected.put("i", 1);
         expected.put("want", 1);
-        expected.put("know", 1);
+        expected.put("know", 2);
+        expected.put("all", 1);
+        expected.put("111", 1);
+        expected.put("notaword", 1);
+        expected.put("n0taw0rd", 1);
         expected.put("cure", 1);
         expected.put("lung", 1);
         expected.put("cancer", 1);
 
-        Assert.assertEquals(expected, queryParser.parse("I WANT To know if there is a cure for lung cancer"));
+        Assert.assertEquals(expected, queryParser.parse("I WANT  To \tknow if know-it-all 111 #notaword n0taw0rd there is a cure for lung cancer"));
     }
 }
