@@ -1,5 +1,6 @@
-package com.joma.studies;
+package com.joma.studies.query;
 
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +13,7 @@ public class QueryParserTest {
 
     @Before
     public void setUp() throws Exception {
-        queryParser = new QueryParser();
+        queryParser = new QueryParser(new StandardAnalyzer());
     }
 
     @Test
