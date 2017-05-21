@@ -42,4 +42,13 @@ public class ArticleDto {
             return new ArticleDto(title, abstractText);
         }
     }
+
+
+    @Override
+    public String toString() {
+        return "ArticleDto{" +
+                "title='" + title + '\'' +
+                ", abstractText='" + abstractText + '\'' +
+                '}';
+    }
 }
