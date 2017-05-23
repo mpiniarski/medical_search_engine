@@ -1,4 +1,4 @@
-package com.joma.studies;
+package com.joma.studies.config;
 
 import com.beust.jcommander.Parameter;
 

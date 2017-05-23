@@ -10,6 +10,7 @@ import com.joma.studies.query.dto.QueryAnalysisDto;
 import org.apache.log4j.Logger;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class App {
@@ -39,9 +40,9 @@ public class App {
                     .withTermFrequency(queryParser.parse(query))
                     .build();
 
-            List<ArticleAnalysisDto> articles = articleRepository.findByQuery(queryAnalysisDto
-                    .getTermFrequency()
-                    .keySet())
+            Set<String> queryWords = queryAnalysisDto.getTermFrequency()
+                    .keySet();
+            List<ArticleAnalysisDto> articles = articleRepository.findByQuery(queryWords)
                     .stream()
                     .map(article -> new ArticleAnalysisDto.Builder()
                             .withArticleDto(article)

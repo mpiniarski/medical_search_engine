@@ -2,8 +2,9 @@ package com.joma.studies;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
+import com.joma.studies.config.ConfigProvider;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
@@ -21,7 +22,7 @@ public class AppModule extends AbstractModule {
     @Override
     protected void configure() {
         bind(ConfigProvider.class).toInstance(configProvider);
-        bind(Analyzer.class).toInstance(new StandardAnalyzer());
+        bind(Analyzer.class).toInstance(new EnglishAnalyzer());
     }
 
     @Provides

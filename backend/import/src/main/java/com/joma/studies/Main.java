@@ -3,6 +3,7 @@ package com.joma.studies;
 import com.beust.jcommander.JCommander;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.joma.studies.config.ConfigProvider;
 import org.apache.log4j.Logger;
 
 public class Main {

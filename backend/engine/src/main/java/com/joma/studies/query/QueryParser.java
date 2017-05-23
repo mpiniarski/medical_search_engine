@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import com.joma.studies.query.exception.UnableToParseQueryException;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.en.PorterStemFilter;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
 import java.io.IOException;
@@ -22,9 +21,8 @@ public class QueryParser {
     public Map<String, Integer> parse(String query) throws UnableToParseQueryException {
         try {
             HashMap<String, Integer> result = new HashMap<>();
-            TokenStream tokenStream = new PorterStemFilter(
-                    analyzer.tokenStream(null, query)
-            );
+            TokenStream tokenStream =
+                    analyzer.tokenStream(null, query);
             CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
             tokenStream.reset();
             while (tokenStream.incrementToken()) {

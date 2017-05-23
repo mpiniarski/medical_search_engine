@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.joma.studies.article.lucile.IndexArticleObserver;
 import com.joma.studies.article.xml.XmlReader;
 import com.joma.studies.article.xml.exception.InvalidXmlException;
+import com.joma.studies.config.ConfigProvider;
 import org.apache.log4j.Logger;
 
 import java.io.File;
