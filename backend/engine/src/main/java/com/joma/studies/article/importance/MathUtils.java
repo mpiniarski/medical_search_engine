@@ -6,7 +6,7 @@ import java.util.Map;
 public class MathUtils {
     public double angle(Map<String, Integer> document1, Map<String, Integer> document2) {
         if (document1.isEmpty() || document2.isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("One or both documents are empty");
         }
 
         double dotProduct = dotProduct(document1, document2);
@@ -14,14 +14,16 @@ public class MathUtils {
         double document1Sqrt = vectorMagnitude(document1.values());
         double document2Sqrt = vectorMagnitude(document2.values());
 
-        if (document1Sqrt == 0.0 || document2Sqrt == 0.0) {
-            return 0.0;
+        double denominator = document1Sqrt * document2Sqrt;
+
+        if (denominator == 0.0) {
+            throw new IllegalArgumentException("One or both documents contain only zero values");
         }
 
-        return Math.acos(dotProduct / (document1Sqrt * document2Sqrt));
+        return Math.acos(dotProduct / denominator);
     }
 
-    private double vectorMagnitude(Collection<Integer> vector) {
+    public double vectorMagnitude(Collection<Integer> vector) {
         Integer sum = vector
                 .stream()
                 .map(a -> a * a)
@@ -30,7 +32,7 @@ public class MathUtils {
         return Math.sqrt(sum);
     }
 
-    private double dotProduct(Map<String, Integer> document1, Map<String, Integer> document2) {
+    public double dotProduct(Map<String, Integer> document1, Map<String, Integer> document2) {
         Map<String, Integer> documentShort;
         Map<String, Integer> documentLong;
         if (document1.size() <= document2.size()) {
