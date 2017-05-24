@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Map;
 
 public class MathUtils {
-    public double angle(Map<String, Integer> document1, Map<String, Integer> document2) {
+    public static double angle(Map<String, Integer> document1, Map<String, Integer> document2) {
         if (document1.isEmpty() || document2.isEmpty()) {
             throw new IllegalArgumentException("One or both documents are empty");
         }
@@ -23,7 +23,7 @@ public class MathUtils {
         return Math.acos(dotProduct / denominator);
     }
 
-    public double vectorMagnitude(Collection<Integer> vector) {
+    public static double vectorMagnitude(Collection<Integer> vector) {
         Integer sum = vector
                 .stream()
                 .map(a -> a * a)
@@ -32,7 +32,7 @@ public class MathUtils {
         return Math.sqrt(sum);
     }
 
-    public double dotProduct(Map<String, Integer> document1, Map<String, Integer> document2) {
+    public static double dotProduct(Map<String, Integer> document1, Map<String, Integer> document2) {
         Map<String, Integer> documentShort;
         Map<String, Integer> documentLong;
         if (document1.size() <= document2.size()) {
