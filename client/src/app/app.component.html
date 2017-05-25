@@ -4,34 +4,8 @@
             <div class="mdl-cell mdl-cell-text--center mdl-cell--12-col">
                 <div class="mdl-layout-content--title" mdl-colored="primary">{{appName}}</div>
             </div>
-            <div class="mdl-cell mdl-cell-text--center mdl-cell--12-col">
-                <mdl-textfield type="text" [(ngModel)]="query" placeholder="Type Your query..." autofocus>
-                </mdl-textfield>
-                <button (click)="search()" mdl-button mdl-button-type="fab" mdl-colored="accent" mdl-ripple mdl-button-type="mini-fab">
-                    <mdl-icon>search</mdl-icon>
-                </button>
-            </div>
-            <div class="mdl-cell mdl-cell--center mdl-cell--12-col" *ngFor="let article of articles; let index = index;">
-                <mdl-card mdl-shadow="3">
-                    <mdl-card-title>
-                        <h2 mdl-card-title-text>{{article.title}}</h2>
-                    </mdl-card-title>
-                    <mdl-card-supporting-text>
-                        {{article.abstract | ellipsis:350}}
-                    </mdl-card-supporting-text>
-                    <mdl-card-actions mdl-card-border>
-                        <button mdl-button mdl-colored="primary" mdl-ripple>View more</button>
-                    </mdl-card-actions>
-                    <mdl-card-menu>
-                        <button [hidden]="starred[index]" (click)="rateArticle(index, true)" mdl-button mdl-colored="accent" mdl-button-type="icon" mdl-ripple>
-                            <mdl-icon>star_border</mdl-icon>
-                        </button>
-                        <button [hidden]="!starred[index]" (click)="rateArticle(index, false)" mdl-button mdl-colored="accent" mdl-button-type="icon" mdl-ripple>
-                            <mdl-icon>star</mdl-icon>
-                        </button>
-                    </mdl-card-menu>
-                </mdl-card>
-            </div>
+            <app-search-box></app-search-box>
+            <app-article></app-article>
         </div>
     </mdl-layout-content>
 </mdl-layout>

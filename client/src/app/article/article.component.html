@@ -1,0 +1,23 @@
+<div class="mdl-cell mdl-cell--center mdl-cell--12-col" *ngFor="let article of articles; let index = index;">
+    <mdl-card mdl-shadow="3">
+        <mdl-card-title>
+            <h2 mdl-card-title-text>{{article.title}}</h2>
+        </mdl-card-title>
+        <mdl-card-supporting-text>
+            {{article.abstract | ellipsis:350}}
+        </mdl-card-supporting-text>
+        <mdl-card-actions mdl-card-border>
+            <button mdl-button mdl-colored="primary" mdl-ripple>View more</button>
+        </mdl-card-actions>
+        <mdl-card-menu>
+            <button [hidden]="starred[index]" (click)="rateArticle(index, true)" mdl-button mdl-colored="accent" mdl-button-type="icon"
+                mdl-ripple>
+                <mdl-icon>star_border</mdl-icon>
+            </button>
+            <button [hidden]="!starred[index]" (click)="rateArticle(index, false)" mdl-button mdl-colored="accent" mdl-button-type="icon"
+                mdl-ripple>
+                <mdl-icon>star</mdl-icon>
+            </button>
+        </mdl-card-menu>
+    </mdl-card>
+</div>

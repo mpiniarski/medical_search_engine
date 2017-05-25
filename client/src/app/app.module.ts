@@ -6,11 +6,15 @@ import { MdlModule } from 'angular2-mdl';
 
 import { AppComponent } from './app.component';
 import { EllipsisPipe } from './ellipsis.pipe';
+import { ArticleComponent } from './article/article.component';
+import { SearchBoxComponent } from './search-box/search-box.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        EllipsisPipe
+        EllipsisPipe,
+        ArticleComponent,
+        SearchBoxComponent
     ],
     imports: [
         BrowserModule,
