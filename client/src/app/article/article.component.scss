@@ -1,3 +1,5 @@
+$mdl-card__text-color: #333;
+
 .mdl-cell--center {
     display: flex;
     justify-content: center;
@@ -6,4 +8,13 @@
 
 .mdl-card {
     width: 80%;
+}
+
+.mdl-card__supporting-text {
+    white-space: pre-line;
+}
+
+.mdl-card__text {
+    color: $mdl-card__text-color;
+    line-height: 14px;
 }
