@@ -1,5 +1,7 @@
 package com.joma.studies
 import com.google.inject.Inject
+import com.joma.studies.query.QueryParser
+import com.joma.studies.query.dto.QueryAnalysisDto
 import com.joma.studies.search.SortingAlgorithm
 import com.joma.studies.search.SortingAlgorithmDispatcher
 import com.joma.studies.search.query.QuerySearchRequest
@@ -14,13 +16,18 @@ import javax.validation.Valid
 class SearchController
 @Inject constructor(
         val sortingAlgorithmDispatcher: SortingAlgorithmDispatcher,
+        val queryParser: QueryParser,
         val searchEngine: SearchEngine
 ) {
     @RequestMapping(method = arrayOf(POST))
     fun search(@Valid @RequestBody request: QuerySearchRequest) : SearchResult {
         val articleImportanceSorter = sortingAlgorithmDispatcher.getArticleImportanceSorter(request.sortingAlgorithm ?: SortingAlgorithm.TF)
-        val sortedArticles = searchEngine.search(request.query, articleImportanceSorter)
-        return SearchResult(sortedArticles)
+        val queryAnalysisDto = QueryAnalysisDto.Builder()
+                .withQuery(request.query)
+                .withTermFrequency(queryParser.parse(request.query))
+                .build()
+        val sortedArticles = searchEngine.search(queryAnalysisDto, articleImportanceSorter)
+        return SearchResult(queryAnalysisDto.termFrequency, sortedArticles)
     }
 }
 

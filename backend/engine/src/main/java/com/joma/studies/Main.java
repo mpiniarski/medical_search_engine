@@ -5,7 +5,10 @@ import com.google.inject.Injector;
 
 public class Main {
     public static void main(String[] args) {
-        Injector injector = Guice.createInjector(new AppModule());
+        if(args.length<0){
+            return;
+        }
+        Injector injector = Guice.createInjector(new AppModule(args[0]));
         App app = injector.getInstance(App.class);
         app.run(args);
     }

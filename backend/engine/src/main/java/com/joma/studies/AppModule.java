@@ -13,6 +13,12 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 public class AppModule extends AbstractModule{
+    private final String directoryPath;
+
+    public AppModule(String directoryPath) {
+        this.directoryPath = directoryPath;
+    }
+
     @Override
     protected void configure() {
         bind(Analyzer.class).toInstance(new EnglishAnalyzer());
@@ -21,8 +27,6 @@ public class AppModule extends AbstractModule{
 
     @Provides
     public Directory provideDirectory() throws IOException {
-        return FSDirectory.open(
-                Paths.get("/home/marcin/Projekty/medical_search_engine/index")
-        );
+        return FSDirectory.open(Paths.get(directoryPath));
     }
 }

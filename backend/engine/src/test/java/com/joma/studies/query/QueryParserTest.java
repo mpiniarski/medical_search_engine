@@ -15,7 +15,7 @@ public class QueryParserTest {
 
     @Before
     public void setUp() throws Exception {
-        Injector injector = Guice.createInjector(new AppModule());
+        Injector injector = Guice.createInjector(new AppModule(""));
         queryParser = injector.getInstance(QueryParser.class);
     }
 

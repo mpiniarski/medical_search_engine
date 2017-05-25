@@ -24,12 +24,7 @@ public class SearchEngine {
         this.articleRepository = articleRepository;
     }
 
-    public List<ArticleDto> search(String query, ArticleImportanceSorter articleImportanceSorter) throws RepositoryException {
-        QueryAnalysisDto queryAnalysisDto = new QueryAnalysisDto.Builder()
-                .withQuery(query)
-                .withTermFrequency(queryParser.parse(query))
-                .build();
-
+    public List<ArticleDto> search(QueryAnalysisDto queryAnalysisDto, ArticleImportanceSorter articleImportanceSorter) throws RepositoryException {
         Set<String> queryWords = queryAnalysisDto.getTermFrequency()
                 .keySet();
         List<ArticleAnalysisDto> articles = articleRepository.findByQuery(queryWords)
@@ -41,5 +36,13 @@ public class SearchEngine {
                 .collect(Collectors.toList());
 
         return articleImportanceSorter.sort(queryAnalysisDto, articles);
+    }
+
+    public List<ArticleDto> search(String query, ArticleImportanceSorter articleImportanceSorter) throws RepositoryException {
+        QueryAnalysisDto queryAnalysisDto = new QueryAnalysisDto.Builder()
+                .withQuery(query)
+                .withTermFrequency(queryParser.parse(query))
+                .build();
+        return search(queryAnalysisDto, articleImportanceSorter);
     }
 }

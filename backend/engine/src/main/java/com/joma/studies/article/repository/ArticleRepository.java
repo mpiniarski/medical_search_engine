@@ -39,7 +39,6 @@ public class ArticleRepository {
                 ));
             }
             indexReader.close();
-            directory.close();
             return result;
         } catch (IOException exception) {
             throw new RepositoryException(exception);
