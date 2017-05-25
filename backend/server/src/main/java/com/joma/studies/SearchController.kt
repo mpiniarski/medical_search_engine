@@ -1,7 +1,7 @@
 package com.joma.studies
 import com.joma.studies.query.QueryParser
 import com.joma.studies.query.dto.QueryAnalysisDto
-import com.joma.studies.search.SortingAlgorithmFactory
+import com.joma.studies.search.ArticleImportanceSorterFactory
 import com.joma.studies.search.query.QuerySearchRequest
 import com.joma.studies.search.query.TermSearchRequest
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,13 +15,13 @@ import javax.validation.Valid
 @RequestMapping("v1/search")
 class SearchController
 @Autowired constructor(
-        val sortingAlgorithmFactory: SortingAlgorithmFactory,
+        val articleImportanceSorterFactory: ArticleImportanceSorterFactory,
         val queryParser: QueryParser,
         val searchEngine: SearchEngine
 ) {
     @RequestMapping(value = "/query", method = arrayOf(POST))
     fun searchByQuery(@Valid @RequestBody request: QuerySearchRequest) : SearchResult {
-        val articleImportanceSorter = sortingAlgorithmFactory.getArticleImportanceSorter(request.sortingAlgorithm)
+        val articleImportanceSorter = articleImportanceSorterFactory.getSorter(request.sortingAlgorithm)
         val queryAnalysisDto = QueryAnalysisDto.Builder()
                 .withQuery(request.query)
                 .withTermFrequency(queryParser.parse(request.query))
@@ -32,7 +32,7 @@ class SearchController
 
     @RequestMapping(value = "/term", method = arrayOf(POST))
     fun search(@Valid @RequestBody request: TermSearchRequest) : SearchResult {
-        val articleImportanceSorter = sortingAlgorithmFactory.getArticleImportanceSorter(request.sortingAlgorithm)
+        val articleImportanceSorter = articleImportanceSorterFactory.getSorter(request.sortingAlgorithm)
         val sortedArticles = searchEngine.search(request.query, articleImportanceSorter)
         return SearchResult(request.query, sortedArticles)
     }

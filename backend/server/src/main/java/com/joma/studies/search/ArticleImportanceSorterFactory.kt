@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class SortingAlgorithmFactory
+class ArticleImportanceSorterFactory
 @Autowired constructor(
         tfArticleImportanceSorter: TfArticleImportanceSorter
 ) {
@@ -15,7 +15,7 @@ class SortingAlgorithmFactory
             TF to tfArticleImportanceSorter
     )
 
-    fun getArticleImportanceSorter(sortingAlgorithm: SortingAlgorithm): ArticleImportanceSorter {
+    fun getSorter(sortingAlgorithm: SortingAlgorithm): ArticleImportanceSorter {
         return map[sortingAlgorithm] ?: throw IllegalArgumentException("Unknown sorting algorithm")
     }
 }
