@@ -1,0 +1,5 @@
+rootProject.name = 'server'
+include ':engine'
+include ':core'
+project(':engine').projectDir = new File('../engine')
+project(':core').projectDir = new File('../core')
