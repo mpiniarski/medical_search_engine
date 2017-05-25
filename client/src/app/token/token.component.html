@@ -1,0 +1,13 @@
+<span *ngFor="let token of tokens; let index = index;" class="token">
+    <span [mdl-badge]="number[index]" mdl-badge-overlap>
+    <span class="mdl-chip mdl-chip--deletable">
+        <button (click)="subtract(index)" type="button" class="mdl-chip__action mdl-chip__action--left">
+            <i class="material-icons">remove_circle</i>
+        </button>
+        <span class="mdl-chip__text">{{token}}</span>
+        <button (click)="add(index)" type="button" class="mdl-chip__action">
+            <i class="material-icons">add_circle</i>
+        </button>
+    </span>
+    </span>
+</span>

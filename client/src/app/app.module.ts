@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { EllipsisPipe } from './ellipsis.pipe';
 import { ArticleComponent } from './article/article.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
+import { TokenComponent } from './token/token.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         EllipsisPipe,
         ArticleComponent,
-        SearchBoxComponent
+        SearchBoxComponent,
+        TokenComponent
     ],
     imports: [
         BrowserModule,

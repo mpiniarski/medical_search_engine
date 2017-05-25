@@ -1,0 +1,31 @@
+$mdl-chip__color: #ffc107;
+$mdl-chip__text-color: #424242;
+
+.token {
+    margin: 0 5px;
+}
+
+.mdl-chip {
+    padding: 0;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.mdl-chip__contact {
+    background-color: $mdl-chip__color;
+    cursor: pointer;
+}
+
+.mdl-chip__contact--right {
+    margin: 0 0 0 8px;
+}
+
+.mld-chip__contact-icon {
+    line-height: 32px;
+    color: $mdl-chip__text-color;
+}
+
+.mdl-chip__action--left {
+    margin-left: 0;
+    margin-right: 4px;
+}
