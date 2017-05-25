@@ -1,19 +1,21 @@
 package com.joma.studies.query;
 
-import com.google.inject.Inject;
 import com.joma.studies.query.exception.UnableToParseQueryException;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class QueryParser {
     private final Analyzer analyzer;
 
-    @Inject
+    @Autowired
     public QueryParser(Analyzer analyzer) {
         this.analyzer = analyzer;
     }

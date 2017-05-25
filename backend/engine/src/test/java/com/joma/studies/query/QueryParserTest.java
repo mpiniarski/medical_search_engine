@@ -1,8 +1,6 @@
 package com.joma.studies.query;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.joma.studies.AppModule;
+import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,8 +13,7 @@ public class QueryParserTest {
 
     @Before
     public void setUp() throws Exception {
-        Injector injector = Guice.createInjector(new AppModule(""));
-        queryParser = injector.getInstance(QueryParser.class);
+        queryParser = new QueryParser(new EnglishAnalyzer());
     }
 
     @Test

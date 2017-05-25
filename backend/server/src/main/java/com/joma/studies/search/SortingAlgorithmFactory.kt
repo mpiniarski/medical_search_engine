@@ -1,13 +1,14 @@
 package com.joma.studies.search
 
-import com.google.inject.Inject
 import com.joma.studies.article.importance.ArticleImportanceSorter
 import com.joma.studies.article.importance.TfArticleImportanceSorter
 import com.joma.studies.search.SortingAlgorithm.TF
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class SortingAlgorithmDispatcher @Inject constructor(
+class SortingAlgorithmFactory
+@Autowired constructor(
         tfArticleImportanceSorter: TfArticleImportanceSorter
 ) {
     private val map: Map<SortingAlgorithm, ArticleImportanceSorter> = hashMapOf(

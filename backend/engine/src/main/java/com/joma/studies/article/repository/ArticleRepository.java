@@ -1,6 +1,5 @@
 package com.joma.studies.article.repository;
 
-import com.google.inject.Inject;
 import com.joma.studies.article.dto.ArticleDto;
 import com.joma.studies.article.repository.exception.RepositoryException;
 import org.apache.lucene.index.DirectoryReader;
@@ -8,18 +7,21 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.store.Directory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+@Repository
 public class ArticleRepository {
     private final Directory directory;
     private final QueryGenerator queryGenerator;
     private final ArticleMapper articleMapper;
 
-    @Inject
+    @Autowired
     public ArticleRepository(Directory directory, QueryGenerator queryGenerator, ArticleMapper articleMapper) {
         this.directory = directory;
         this.queryGenerator = queryGenerator;

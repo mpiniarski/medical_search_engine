@@ -2,9 +2,11 @@ package com.joma.studies.article.repository;
 
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.*;
+import org.springframework.stereotype.Component;
 
 import java.util.Set;
 
+@Component
 public class QueryGenerator {
 
     private static final String TITLE = "title";

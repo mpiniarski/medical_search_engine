@@ -1,6 +1,5 @@
 package com.joma.studies;
 
-import com.google.inject.Inject;
 import com.joma.studies.article.dto.ArticleDto;
 import com.joma.studies.article.importance.ArticleImportanceSorter;
 import com.joma.studies.article.importance.dto.ArticleAnalysisDto;
@@ -8,17 +7,20 @@ import com.joma.studies.article.repository.ArticleRepository;
 import com.joma.studies.article.repository.exception.RepositoryException;
 import com.joma.studies.query.QueryParser;
 import com.joma.studies.query.dto.QueryAnalysisDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Component
 public class SearchEngine {
 
     private final QueryParser queryParser;
     private final ArticleRepository articleRepository;
 
-    @Inject
+    @Autowired
     public SearchEngine(QueryParser queryParser, ArticleRepository articleRepository) {
         this.queryParser = queryParser;
         this.articleRepository = articleRepository;

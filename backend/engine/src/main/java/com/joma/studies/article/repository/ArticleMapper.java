@@ -3,7 +3,9 @@ package com.joma.studies.article.repository;
 import com.joma.studies.article.dto.ArticleDto;
 import com.joma.studies.article.dto.exception.ArticleBuildingException;
 import org.apache.lucene.document.Document;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ArticleMapper {
 
     private static final String TITLE = "title";

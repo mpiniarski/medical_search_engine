@@ -1,8 +1,11 @@
 package com.joma.studies.article.importance;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Collection;
 import java.util.Map;
 
+@Component
 public class MathUtils {
     public static double angle(Map<String, Integer> document1, Map<String, Integer> document2) {
         if (document1.isEmpty() || document2.isEmpty()) {
