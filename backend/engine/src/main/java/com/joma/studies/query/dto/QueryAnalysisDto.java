@@ -3,16 +3,16 @@ package com.joma.studies.query.dto;
 import java.util.Map;
 
 public class QueryAnalysisDto {
-    private final String query;
+    private final String value;
     private final Map<String, Integer> termFrequency;
 
-    private QueryAnalysisDto(String query, Map<String, Integer> termFrequency) {
-        this.query = query;
+    private QueryAnalysisDto(String value, Map<String, Integer> termFrequency) {
+        this.value = value;
         this.termFrequency = termFrequency;
     }
 
-    public String getQuery() {
-        return query;
+    public String getValue() {
+        return value;
     }
 
     public Map<String, Integer> getTermFrequency() {

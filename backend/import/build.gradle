@@ -27,6 +27,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
+build.dependsOn shadowJar
+
 mainClassName = 'com.joma.studies.Main'
 
 
