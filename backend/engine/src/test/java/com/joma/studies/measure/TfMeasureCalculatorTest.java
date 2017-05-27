@@ -5,13 +5,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class MeasureCalculatorTest {
+public class TfMeasureCalculatorTest {
 
     private TfMeasureCalculator measureCalculator;
 
     @Before
     public void setUp() throws Exception {
-        measureCalculator = new TfMeasureCalculator(new EnglishAnalyzer());
+        measureCalculator = new TfMeasureCalculator(new TermAnalyzer(new EnglishAnalyzer()));
     }
 
     @Test

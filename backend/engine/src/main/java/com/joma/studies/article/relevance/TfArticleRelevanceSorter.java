@@ -29,7 +29,7 @@ public class TfArticleRelevanceSorter implements ArticleRelevanceSorter {
                 articles.stream()
                         .map(article -> new ArticleAnalysisDto.Builder()
                                 .withArticleDto(article)
-                                .withTermFrequency(tfMeasureCalculator.calculate(article.toString()))
+                                .withMeasureMap(tfMeasureCalculator.calculate(article.toString()))
                                 .build()
                         )
                         .collect(Collectors.toList()));

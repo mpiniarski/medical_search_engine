@@ -3,6 +3,7 @@ package com.joma.studies.article.relevance;
 import com.joma.studies.ArticleWithRelevanceDto;
 import com.joma.studies.article.dto.ArticleDto;
 import com.joma.studies.measure.MeasureMap;
+import com.joma.studies.measure.TermAnalyzer;
 import com.joma.studies.measure.TfMeasureCalculator;
 import com.joma.studies.query.dto.QueryAnalysisDto;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
@@ -23,7 +24,7 @@ public class TfArticleRelevanceSorterTest {
     @Before
     public void setUp() throws Exception {
         tfSorter = new TfArticleRelevanceSorter(new DocumentDistanceSorter(),
-                new TfMeasureCalculator(new EnglishAnalyzer())
+                new TfMeasureCalculator(new TermAnalyzer(new EnglishAnalyzer()))
         );
         MeasureMap queryTermFrequency = new MeasureMap();
         queryTermFrequency.put("cancer", 1.);
