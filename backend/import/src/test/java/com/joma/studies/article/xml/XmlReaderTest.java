@@ -9,6 +9,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -57,6 +58,10 @@ public class XmlReaderTest {
                 articleDto.getTitle());
         assertEquals("no summary.",
                 articleDto.getAbstractText());
+        assertEquals(Arrays.asList("Alina Wilkowska", "Jerzy Landowski"),
+                articleDto.getAuthors());
+        assertEquals("2017.02.26",
+                articleDto.getDate());
     }
 
     @Test
