@@ -1,11 +1,9 @@
-package com.joma.studies.article.importance;
+package com.joma.studies.article.relevance;
 
+import com.joma.studies.measure.MeasureMap;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class MathUtilsTest {
 
@@ -19,71 +17,71 @@ public class MathUtilsTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void whenEmpty_shouldThrowIllegalArgumentException() throws Exception {
-        mathUtils.angle(new HashMap<>(), new HashMap<>());
+        mathUtils.angle(new MeasureMap(), new MeasureMap());
     }
 
     @Test
     public void whenContainsDifferentWords_shouldReturnArcCosZero() throws Exception {
-        Map<String, Integer> query = new HashMap<>();
-        query.put("cancer", 1);
-        Map<String, Integer> article = new HashMap<>();
-        article.put("breasts", 1);
+        MeasureMap query = new MeasureMap();
+        query.put("cancer", 1.);
+        MeasureMap article = new MeasureMap();
+        article.put("breasts", 1.);
         double distance = mathUtils.angle(query, article);
         Assert.assertEquals(Math.acos(0.0), distance, DELTA);
     }
 
     @Test
     public void whenContainsSameWords_shouldReturnArcCosOne() throws Exception {
-        Map<String, Integer> query = new HashMap<>();
-        query.put("cancer", 1);
-        Map<String, Integer> article = new HashMap<>();
-        article.put("cancer", 1);
+        MeasureMap query = new MeasureMap();
+        query.put("cancer", 1.);
+        MeasureMap article = new MeasureMap();
+        article.put("cancer", 1.);
         double distance = mathUtils.angle(query, article);
         Assert.assertEquals(Math.acos(1.0), distance, DELTA);
     }
 
     @Test
     public void whenContainsSamePairAndDifferentPair_shouldReturnArcCosHalf() throws Exception {
-        Map<String, Integer> query = new HashMap<>();
-        query.put("breast", 1);
-        query.put("cancer", 1);
-        Map<String, Integer> article = new HashMap<>();
-        article.put("lung", 1);
-        article.put("cancer", 1);
+        MeasureMap query = new MeasureMap();
+        query.put("breast", 1.);
+        query.put("cancer", 1.);
+        MeasureMap article = new MeasureMap();
+        article.put("lung", 1.);
+        article.put("cancer", 1.);
         double distance = mathUtils.angle(query, article);
         Assert.assertEquals(Math.acos(0.5), distance, DELTA);
     }
 
     @Test
     public void whenContainsSameWordsWithDifferentWeight_shouldReturnArcCosOne() throws Exception {
-        Map<String, Integer> query = new HashMap<>();
-        query.put("cancer", 2);
-        Map<String, Integer> article = new HashMap<>();
-        article.put("cancer", 3);
+        MeasureMap query = new MeasureMap();
+        query.put("cancer", 2.);
+        MeasureMap article = new MeasureMap();
+        article.put("cancer", 3.);
         double distance = mathUtils.angle(query, article);
         Assert.assertEquals(Math.acos(1), distance, DELTA);
     }
 
     @Test
     public void whenContainsSamePairAndDifferentPairWithDifferentWeight_shouldReturnProperArcCos() throws Exception {
-        Map<String, Integer> query = new HashMap<>();
-        query.put("breast", 2);
-        query.put("cancer", 3);
-        Map<String, Integer> article = new HashMap<>();
-        article.put("lung", 4);
-        article.put("cancer", 5);
+        MeasureMap query = new MeasureMap();
+        query.put("breast", 2.);
+        query.put("cancer", 3.);
+        MeasureMap article = new MeasureMap();
+        article.put("lung", 4.);
+        article.put("cancer", 5.);
         double distance = mathUtils.angle(query, article);
         Assert.assertEquals(Math.acos(15/(Math.sqrt(533))), distance, DELTA);
     }
 
     @Test
     public void whenContainsGivenPairs_shouldReturnProperArcCos() throws Exception {
-        Map<String, Integer> query = new HashMap<>();
-        query.put("lung", 7);
-        query.put("cancer", 1);
-        Map<String, Integer> article = new HashMap<>();
-        article.put("lung", 5);
-        article.put("cancer", 5);
+        MeasureMap query = new MeasureMap();
+        query.put("lung", 7.);
+        query.put("cancer", 1.);
+        MeasureMap article = new MeasureMap();
+        article.put("lung", 5.);
+        article.put("cancer", 5.);
         double distance = mathUtils.angle(query, article);
         Assert.assertEquals(Math.acos(0.8), distance, DELTA);
     }

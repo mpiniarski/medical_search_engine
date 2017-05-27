@@ -44,11 +44,9 @@ public class ArticleDto {
     }
 
 
+    //TODO right place for it?
     @Override
     public String toString() {
-        return "ArticleDto{" +
-                "title='" + title + '\'' +
-                ", abstractText='" + abstractText + '\'' +
-                '}';
+        return title + " " + abstractText;
     }
 }

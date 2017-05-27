@@ -1,13 +1,13 @@
-package com.joma.studies.article.importance;
+package com.joma.studies.article.relevance;
 
+import com.joma.studies.measure.MeasureMap;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
-import java.util.Map;
 
 @Component
 public class MathUtils {
-    public static double angle(Map<String, Integer> document1, Map<String, Integer> document2) {
+    public static double angle(MeasureMap document1, MeasureMap document2) {
         if (document1.isEmpty() || document2.isEmpty()) {
             throw new IllegalArgumentException("One or both documents are empty");
         }
@@ -26,18 +26,18 @@ public class MathUtils {
         return Math.acos(dotProduct / denominator);
     }
 
-    public static double vectorMagnitude(Collection<Integer> vector) {
-        Integer sum = vector
+    public static double vectorMagnitude(Collection<Double> vector) {
+        Double sum = vector
                 .stream()
                 .map(a -> a * a)
-                .mapToInt(Integer::intValue)
+                .mapToDouble(Double::doubleValue)
                 .sum();
         return Math.sqrt(sum);
     }
 
-    public static double dotProduct(Map<String, Integer> document1, Map<String, Integer> document2) {
-        Map<String, Integer> documentShort;
-        Map<String, Integer> documentLong;
+    public static double dotProduct(MeasureMap document1, MeasureMap document2) {
+        MeasureMap documentShort;
+        MeasureMap documentLong;
         if (document1.size() <= document2.size()) {
             documentShort = document1;
             documentLong = document2;
@@ -48,12 +48,8 @@ public class MathUtils {
 
         return documentShort.keySet()
                 .stream()
-                .map(word -> {
-                    Integer documentShortValue = documentShort.get(word);
-                    Integer documentLongValue = documentLong.getOrDefault(word, 0);
-                    return documentShortValue * documentLongValue;
-                })
-                .mapToDouble(Integer::doubleValue)
+                .map(word -> documentShort.get(word) * documentLong.getOrDefault(word, 0.0))
+                .mapToDouble(Double::doubleValue)
                 .sum();
     }
 }

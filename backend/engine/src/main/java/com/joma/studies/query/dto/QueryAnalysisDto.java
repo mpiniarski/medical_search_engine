@@ -1,41 +1,41 @@
 package com.joma.studies.query.dto;
 
-import java.util.Map;
+import com.joma.studies.measure.MeasureMap;
 
 public class QueryAnalysisDto {
     private final String value;
-    private final Map<String, Integer> termFrequency;
+    private final MeasureMap measureMap;
 
-    private QueryAnalysisDto(String value, Map<String, Integer> termFrequency) {
+    private QueryAnalysisDto(String value, MeasureMap measureMap) {
         this.value = value;
-        this.termFrequency = termFrequency;
+        this.measureMap = measureMap;
     }
 
     public String getValue() {
         return value;
     }
 
-    public Map<String, Integer> getTermFrequency() {
-        return termFrequency;
+    public MeasureMap getMeasureMap() {
+        return measureMap;
     }
 
 
     public static final class Builder {
         private String query;
-        private Map<String, Integer> termFrequency;
+        private MeasureMap measureMap;
 
         public Builder withQuery(String query) {
             this.query = query;
             return this;
         }
 
-        public Builder withTermFrequency(Map<String, Integer> termFrequency) {
-            this.termFrequency = termFrequency;
+        public Builder withTermFrequency(MeasureMap measureMap) {
+            this.measureMap = measureMap;
             return this;
         }
 
         public QueryAnalysisDto build() {
-            return new QueryAnalysisDto(query, termFrequency);
+            return new QueryAnalysisDto(query, measureMap);
         }
     }
 }

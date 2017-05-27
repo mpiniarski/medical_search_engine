@@ -18,22 +18,22 @@ import java.util.Set;
 @Repository
 public class ArticleRepository {
     private final Directory directory;
-    private final QueryGenerator queryGenerator;
+    private final RepositoryQueryGenerator repositoryQueryGenerator;
     private final ArticleMapper articleMapper;
 
     @Autowired
-    public ArticleRepository(Directory directory, QueryGenerator queryGenerator, ArticleMapper articleMapper) {
+    public ArticleRepository(Directory directory, RepositoryQueryGenerator repositoryQueryGenerator, ArticleMapper articleMapper) {
         this.directory = directory;
-        this.queryGenerator = queryGenerator;
+        this.repositoryQueryGenerator = repositoryQueryGenerator;
         this.articleMapper = articleMapper;
     }
 
-    public List<ArticleDto> findByQuery(Set<String> words) throws RepositoryException {
+    public List<ArticleDto> findByWordSet(Set<String> words) throws RepositoryException {
         try {
             List<ArticleDto> result = new ArrayList<>();
             IndexReader indexReader = DirectoryReader.open(directory);
             IndexSearcher indexSearcher = new IndexSearcher(indexReader);
-            ScoreDoc[] hits = indexSearcher.search(queryGenerator.generate(words), 1000)
+            ScoreDoc[] hits = indexSearcher.search(repositoryQueryGenerator.generate(words), 1000)
                     .scoreDocs;
             for (ScoreDoc hit : hits) {
                 result.add(articleMapper.toArticleDto(

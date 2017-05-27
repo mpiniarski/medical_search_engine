@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.Set;
 
 @Component
-public class QueryGenerator {
+public class RepositoryQueryGenerator {
 
     private static final String TITLE = "title";
     private static final String ABSTRACT = "abstractText";
