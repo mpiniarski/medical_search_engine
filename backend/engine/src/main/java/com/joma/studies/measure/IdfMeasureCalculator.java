@@ -31,7 +31,8 @@ public class IdfMeasureCalculator implements RelativeMeasureCalculator {
 
         MeasureMap idfMeasureMap = new MeasureMap();
         wordInNumberOfDocuments.forEach((key, value) ->
-                idfMeasureMap.put(key, Math.log10(texts.size() / value))
+                //TODO it this +1 ok?
+                idfMeasureMap.put(key, Math.log(texts.size() / value.doubleValue()) + 1)
         );
         return idfMeasureMap;
     }
