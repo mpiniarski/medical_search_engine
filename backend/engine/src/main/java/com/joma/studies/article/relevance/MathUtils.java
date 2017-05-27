@@ -7,7 +7,7 @@ import java.util.Collection;
 
 @Component
 public class MathUtils {
-    public static double angle(MeasureMap document1, MeasureMap document2) {
+    public static double cosineMeasure(MeasureMap document1, MeasureMap document2) {
         if (document1.isEmpty() || document2.isEmpty()) {
             throw new IllegalArgumentException("One or both documents are empty");
         }
@@ -23,7 +23,7 @@ public class MathUtils {
             throw new IllegalArgumentException("One or both documents contain only zero values");
         }
 
-        return Math.acos(dotProduct / denominator);
+        return (dotProduct / denominator);
     }
 
     public static double vectorMagnitude(Collection<Double> vector) {

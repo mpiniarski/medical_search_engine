@@ -15,6 +15,7 @@ public class TfMeasureCalculator implements SimpleMeasureCalculator {
     }
 
     @Override
+    //TODO should it be divided by term number?
     public MeasureMap calculate(String text) throws MeasureCalculationException {
         MeasureMap result = new MeasureMap();
         for (String term : termAnalyzer.getTermList(text)) {

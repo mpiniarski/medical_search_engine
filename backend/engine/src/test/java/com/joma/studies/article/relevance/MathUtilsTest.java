@@ -17,7 +17,7 @@ public class MathUtilsTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void whenEmpty_shouldThrowIllegalArgumentException() throws Exception {
-        mathUtils.angle(new MeasureMap(), new MeasureMap());
+        mathUtils.cosineMeasure(new MeasureMap(), new MeasureMap());
     }
 
     @Test
@@ -26,7 +26,7 @@ public class MathUtilsTest {
         query.put("cancer", 1.);
         MeasureMap article = new MeasureMap();
         article.put("breasts", 1.);
-        double distance = mathUtils.angle(query, article);
+        double distance = mathUtils.cosineMeasure(query, article);
         Assert.assertEquals(Math.acos(0.0), distance, DELTA);
     }
 
@@ -36,7 +36,7 @@ public class MathUtilsTest {
         query.put("cancer", 1.);
         MeasureMap article = new MeasureMap();
         article.put("cancer", 1.);
-        double distance = mathUtils.angle(query, article);
+        double distance = mathUtils.cosineMeasure(query, article);
         Assert.assertEquals(Math.acos(1.0), distance, DELTA);
     }
 
@@ -48,7 +48,7 @@ public class MathUtilsTest {
         MeasureMap article = new MeasureMap();
         article.put("lung", 1.);
         article.put("cancer", 1.);
-        double distance = mathUtils.angle(query, article);
+        double distance = mathUtils.cosineMeasure(query, article);
         Assert.assertEquals(Math.acos(0.5), distance, DELTA);
     }
 
@@ -58,7 +58,7 @@ public class MathUtilsTest {
         query.put("cancer", 2.);
         MeasureMap article = new MeasureMap();
         article.put("cancer", 3.);
-        double distance = mathUtils.angle(query, article);
+        double distance = mathUtils.cosineMeasure(query, article);
         Assert.assertEquals(Math.acos(1), distance, DELTA);
     }
 
@@ -70,7 +70,7 @@ public class MathUtilsTest {
         MeasureMap article = new MeasureMap();
         article.put("lung", 4.);
         article.put("cancer", 5.);
-        double distance = mathUtils.angle(query, article);
+        double distance = mathUtils.cosineMeasure(query, article);
         Assert.assertEquals(Math.acos(15/(Math.sqrt(533))), distance, DELTA);
     }
 
@@ -82,7 +82,7 @@ public class MathUtilsTest {
         MeasureMap article = new MeasureMap();
         article.put("lung", 5.);
         article.put("cancer", 5.);
-        double distance = mathUtils.angle(query, article);
+        double distance = mathUtils.cosineMeasure(query, article);
         Assert.assertEquals(Math.acos(0.8), distance, DELTA);
     }
 }
