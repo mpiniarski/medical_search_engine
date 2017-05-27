@@ -12,7 +12,8 @@ import * as watchers from '../appStore/app.store.watchers';
 export class SearchBoxComponent implements OnInit {
 
     private query: string;
-    articles;
+    articles: Object[] = [];
+    tokens: string[] = [];
 
     constructor(
         private appStore: AppStore
@@ -31,6 +32,17 @@ export class SearchBoxComponent implements OnInit {
     private watchArticles(body: Object): void {
         watchers.watchArticles(this.appStore, body).subscribe(articles => {
             this.articles = articles.articles;
+            this.tokens = this.getTokens(articles.query.termFrequency);
         });
+    }
+
+    private getTokens(object: Object[]) {
+        let tokens: string[] = [];
+        for (var key in object) {
+            if (object.hasOwnProperty(key)) {
+                tokens.push(key);
+            }
+        }
+        return tokens;
     }
 }
