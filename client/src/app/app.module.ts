@@ -10,6 +10,9 @@ import { ArticleComponent } from './article/article.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
 import { TokenComponent } from './token/token.component';
 
+import { AppStore } from './appStore/app.store';
+import { AppAsyncs } from './appStore/app.asyncs';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -24,7 +27,10 @@ import { TokenComponent } from './token/token.component';
         HttpModule,
         MdlModule
     ],
-    providers: [],
+    providers: [
+        AppStore,
+        AppAsyncs
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
