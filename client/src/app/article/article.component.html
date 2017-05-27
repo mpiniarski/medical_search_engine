@@ -1,15 +1,15 @@
 <div class="mdl-cell mdl-cell--center mdl-cell--12-col" *ngFor="let article of articles; let index = index;">
     <mdl-card mdl-shadow="3">
         <mdl-card-title>
-            <h2 mdl-card-title-text>{{article.title}}</h2>
+            <h2 mdl-card-title-text>{{article.article.title}}</h2>
         </mdl-card-title>
         <mdl-card-supporting-text [hidden]="expand[index]">
-            <div>{{article.abstractText | ellipsis:350}}</div>
+            <div>{{article.article.abstractText | ellipsis:350}}</div>
         </mdl-card-supporting-text>
         <mdl-card-supporting-text [hidden]="!expand[index]">
             <!--<div class="mdl-card__text">Date: {{article.date}}</div>-->
             <!--<div class="mdl-card__text">Author: {{article.author}}</div>-->
-            <div>{{article.abstractText}}</div>
+            <div>{{article.article.abstractText}}</div>
         </mdl-card-supporting-text>
         <mdl-card-actions mdl-card-border>
             <button [hidden]="expand[index]" (click)="expandArticle(index)" mdl-button mdl-colored="primary" mdl-ripple>View more</button>

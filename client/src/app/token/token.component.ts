@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
     selector: 'app-token',
@@ -7,13 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TokenComponent implements OnInit {
 
-    private tokens: string[] = ["token1", "token2", "token3", "token4", "token5"];
     private number: number[] = [1, 1, 1, 1, 1];
+
+    @Input() tokens;
 
     constructor() { }
 
-    ngOnInit() {
-    }
+    ngOnInit() { }
 
     subtract(index) {
         if (this.number[index] > 1) this.number[index]--;
