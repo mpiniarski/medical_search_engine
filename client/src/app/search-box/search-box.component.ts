@@ -30,9 +30,9 @@ export class SearchBoxComponent implements OnInit {
     }
 
     private watchArticles(body: Object): void {
-        watchers.watchArticles(this.appStore, body).subscribe(articles => {
-            this.articles = articles.articles;
-            this.tokens = this.getTokens(articles.query.termFrequency);
+        watchers.watchArticles(this.appStore, body).subscribe(response => {
+            this.articles = response.articles;
+            this.tokens = this.getTokens(response.query.measureMap);
         });
     }
 
