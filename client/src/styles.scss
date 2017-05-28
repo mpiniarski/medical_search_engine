@@ -1,4 +1,4 @@
-@import "color-definitions";
+@import '~angular2-mdl/scss/color-definitions';
 
 $color-primary: $palette-cyan-500;
 $color-primary-dark: $palette-cyan-700;
@@ -6,4 +6,5 @@ $color-accent: $palette-amber-500;
 $color-primary-contrast: $color-dark-contrast;
 $color-accent-contrast: $color-dark-contrast;
 
-@import 'material-design-lite';
+@import '~angular2-mdl/scss/material-design-lite';
+@import '~@angular2-mdl-ext/select/select';
