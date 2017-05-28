@@ -1,5 +1,6 @@
 package com.joma.studies.measure;
 
+import com.joma.studies.measure.term.TermAnalyzer;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.junit.Before;
 import org.junit.Test;

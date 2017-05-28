@@ -21,7 +21,7 @@ class SearchController
     @RequestMapping(value = "/query", method = arrayOf(POST))
     fun searchByQuery(@Valid @RequestBody request: QuerySearchRequest) : SearchResultDto {
         val articleImportanceSorter = articleRelevanceSorterFactory.getSorter(request.sortingAlgorithm)
-        return searchEngine.search(request.query, measureCalculator, articleImportanceSorter)
+        return searchEngine.search(request.query, articleImportanceSorter)
     }
 
     @RequestMapping(value = "/term", method = arrayOf(POST))

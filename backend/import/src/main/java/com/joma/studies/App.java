@@ -33,8 +33,7 @@ public class App {
         ));
 
         indexArticleObserver.finish();
-
-        logger.info("Import ended with success");
+        logger.info("Import ended with success. Imported articles: " + indexArticleObserver.getArticlesRead());
     }
 
 }

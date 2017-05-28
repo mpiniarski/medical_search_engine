@@ -43,8 +43,8 @@ public class XmlReader implements Observable<ArticleDto> {
                 }
             });
             reader.read(inputStream);
-        } catch (DocumentException e) {
-            throw new InvalidXmlException();
+        } catch (DocumentException exception) {
+            throw new InvalidXmlException(exception);
         }
 
 

@@ -1,9 +1,9 @@
 package com.joma.studies.article.relevance;
 
-import com.joma.studies.ArticleWithRelevanceDto;
+import com.joma.studies.ArticleWithMeasureMapAndRelevanceDto;
 import com.joma.studies.article.dto.ArticleDto;
 import com.joma.studies.measure.MeasureMap;
-import com.joma.studies.measure.TermAnalyzer;
+import com.joma.studies.measure.term.TermAnalyzer;
 import com.joma.studies.measure.TfMeasureCalculator;
 import com.joma.studies.query.dto.QueryAnalysisDto;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
@@ -34,10 +34,10 @@ public class TfArticleRelevanceSorterTest {
                 .build();
     }
 
-    private List<ArticleDto> getArticles(List<ArticleWithRelevanceDto> articlesWithRelevance) {
+    private List<ArticleDto> getArticles(List<ArticleWithMeasureMapAndRelevanceDto> articlesWithRelevance) {
         return articlesWithRelevance
                 .stream()
-                .map(ArticleWithRelevanceDto::getArticle)
+                .map(ArticleWithMeasureMapAndRelevanceDto::getArticle)
                 .collect(Collectors.toList());
     }
 

@@ -1,4 +1,4 @@
-package com.joma.studies.measure;
+package com.joma.studies.measure.term;
 
 import com.joma.studies.measure.exception.MeasureCalculationException;
 import org.apache.lucene.analysis.Analyzer;

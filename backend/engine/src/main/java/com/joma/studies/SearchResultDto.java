@@ -6,9 +6,9 @@ import java.util.List;
 
 public class SearchResultDto {
     private final QueryAnalysisDto query;
-    private final List<ArticleWithRelevanceDto> articles;
+    private final List<ArticleWithMeasureMapAndRelevanceDto> articles;
 
-    private SearchResultDto(QueryAnalysisDto query, List<ArticleWithRelevanceDto> articles) {
+    private SearchResultDto(QueryAnalysisDto query, List<ArticleWithMeasureMapAndRelevanceDto> articles) {
         this.query = query;
         this.articles = articles;
     }
@@ -17,21 +17,21 @@ public class SearchResultDto {
         return query;
     }
 
-    public List<ArticleWithRelevanceDto> getArticles() {
+    public List<ArticleWithMeasureMapAndRelevanceDto> getArticles() {
         return articles;
     }
 
 
     public static final class Builder {
         private QueryAnalysisDto queryAnalysisDto;
-        private List<ArticleWithRelevanceDto> articles;
+        private List<ArticleWithMeasureMapAndRelevanceDto> articles;
 
         public Builder withQueryAnalysisDto(QueryAnalysisDto queryAnalysisDto) {
             this.queryAnalysisDto = queryAnalysisDto;
             return this;
         }
 
-        public Builder withArticles(List<ArticleWithRelevanceDto> articles) {
+        public Builder withArticles(List<ArticleWithMeasureMapAndRelevanceDto> articles) {
             this.articles = articles;
             return this;
         }

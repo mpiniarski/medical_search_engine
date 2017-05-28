@@ -1,6 +1,6 @@
 package com.joma.studies.article.relevance;
 
-import com.joma.studies.ArticleWithRelevanceDto;
+import com.joma.studies.ArticleWithMeasureMapAndRelevanceDto;
 import com.joma.studies.article.dto.ArticleDto;
 import com.joma.studies.article.relevance.dto.ArticleAnalysisDto;
 import com.joma.studies.measure.IdfMeasureCalculator;
@@ -27,7 +27,7 @@ public class TfIdfArticleRelevanceSorter implements ArticleRelevanceSorter {
     }
 
     @Override
-    public List<ArticleWithRelevanceDto> sort(MeasureMap queryMeasureMap, List<ArticleDto> articles) {
+    public List<ArticleWithMeasureMapAndRelevanceDto> sort(MeasureMap queryMeasureMap, List<ArticleDto> articles) {
 
         MeasureMap idfMeasureMap = idfMeasureCalculator.calculate(
                 articles.stream()
@@ -41,7 +41,7 @@ public class TfIdfArticleRelevanceSorter implements ArticleRelevanceSorter {
                     MeasureMap tfMeasureMap = tfMeasureCalculator.calculate(article.toString());
                     return new ArticleAnalysisDto.Builder()
                             .withArticleDto(article)
-                            .withMeasureMap(toTfIdfMeasureMap(tfMeasureMap, idfMeasureMap))
+                            .withMeasureMap(tfIdfMeasureMap(tfMeasureMap, idfMeasureMap))
                             .build();
                 })
                 .collect(Collectors.toList());
@@ -49,7 +49,7 @@ public class TfIdfArticleRelevanceSorter implements ArticleRelevanceSorter {
         return documentDistanceSorter.sort(queryMeasureMap, articleAnalysisDtos);
     }
 
-    private MeasureMap toTfIdfMeasureMap(MeasureMap tfMeasureMap, MeasureMap idfMeasureMap) {
+    private MeasureMap tfIdfMeasureMap(MeasureMap tfMeasureMap, MeasureMap idfMeasureMap) {
         MeasureMap tfIdfMeasureMap = new MeasureMap();
         tfMeasureMap.forEach(
                 (k, v) -> tfIdfMeasureMap.put(k, v * idfMeasureMap.get(k))

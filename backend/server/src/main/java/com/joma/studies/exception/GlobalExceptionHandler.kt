@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.ResponseStatus
 import java.util.stream.Collectors
-import javax.servlet.http.HttpServletRequest
 
 
 @ControllerAdvice
@@ -18,7 +17,7 @@ class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(HttpMessageNotReadableException::class)
     @ResponseBody
-    fun handleHttpMessageNotReadableException(request: HttpServletRequest, exception: HttpMessageNotReadableException): List<ValidationErrorDto> {
+    fun handleHttpMessageNotReadableException(exception: HttpMessageNotReadableException): List<ValidationErrorDto> {
         return arrayListOf(
                 ValidationErrorDto(errorMessage = exception.localizedMessage.substringBefore("\n"))
         )

@@ -1,14 +1,17 @@
 package com.joma.studies;
 
 import com.joma.studies.article.dto.ArticleDto;
+import com.joma.studies.measure.MeasureMap;
 
-public class ArticleWithRelevanceDto {
+public class ArticleWithMeasureMapAndRelevanceDto {
     private final ArticleDto article;
     private final Double relevance;
+    private final MeasureMap measureMap;
 
-    private ArticleWithRelevanceDto(ArticleDto article, Double relevance) {
+    private ArticleWithMeasureMapAndRelevanceDto(ArticleDto article, Double relevance, MeasureMap measureMap) {
         this.article = article;
         this.relevance = relevance;
+        this.measureMap = measureMap;
     }
 
     public ArticleDto getArticle() {
@@ -20,9 +23,14 @@ public class ArticleWithRelevanceDto {
     }
 
 
+    public MeasureMap getMeasureMap() {
+        return measureMap;
+    }
+
     public static final class Builder {
         private ArticleDto article;
         private Double relevance;
+        private MeasureMap measureMap;
 
         public Builder withArticle(ArticleDto article) {
             this.article = article;
@@ -34,8 +42,13 @@ public class ArticleWithRelevanceDto {
             return this;
         }
 
-        public ArticleWithRelevanceDto build() {
-            return new ArticleWithRelevanceDto(article, relevance);
+        public Builder withMeasureMap(MeasureMap measureMap) {
+            this.measureMap = measureMap;
+            return this;
+        }
+
+        public ArticleWithMeasureMapAndRelevanceDto build() {
+            return new ArticleWithMeasureMapAndRelevanceDto(article, relevance, measureMap);
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.joma.studies.measure;
 
-import com.joma.studies.measure.exception.MeasureCalculationException;
+import com.joma.studies.measure.term.TermAnalyzer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 
 @Component
-public class IdfMeasureCalculator implements RelativeMeasureCalculator {
+public class IdfMeasureCalculator {
     private final TermAnalyzer termAnalyzer;
 
     @Autowired
@@ -21,8 +21,7 @@ public class IdfMeasureCalculator implements RelativeMeasureCalculator {
         this.termAnalyzer = termAnalyzer;
     }
 
-    @Override
-    public MeasureMap calculate(List<String> texts) throws MeasureCalculationException {
+    public MeasureMap calculate(List<String> texts) {
         Map<String, Long> termInNumberOfDocuments = texts.stream()
                 .map(termAnalyzer::getTermList)
                 .map(HashSet::new)
