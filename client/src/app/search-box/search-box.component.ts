@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { AppStore } from '../appStore/app.store';
 import * as watchers from '../appStore/app.store.watchers';
+
+import { SearchBody } from '../interfaces/common.interfaces';
 
 @Component({
     selector: 'app-search-box',
@@ -15,16 +17,19 @@ export class SearchBoxComponent implements OnInit {
     articles: Object[] = [];
     tokens: string[] = [];
 
+    @Input() currentAlgorithm;
+
     constructor(
         private appStore: AppStore
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() { 
+    }
 
     private search() {
-        const body = {
-            "query": this.query,
-            "sortingAlgorithm": "TF"
+        const body: SearchBody = {
+            query: this.query,
+            sortingAlgorithm: this.currentAlgorithm
         };
         this.watchArticles(body);
     }

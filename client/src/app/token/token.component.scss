@@ -5,6 +5,12 @@ $mdl-chip__text-color: #424242;
     margin: 0 5px;
 }
 
+.mdl-cell--center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .mdl-chip {
     padding: 0;
     margin-right: 5px;
