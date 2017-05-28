@@ -1,28 +1,28 @@
 package com.joma.studies.measure;
 
-import com.joma.studies.article.dto.ArticleDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
-public class TfImportantTitleMeasureCalculator {
+public class TfWeightedArticleMeasureCalculator {
 
-    private final TfMeasureCalculator tfMeasureCalculator;
+    private final TfWeightedMeasureCalculator tfWeightedMeasureCalculator;
 
     @Autowired
-    public TfImportantTitleMeasureCalculator(TfMeasureCalculator tfMeasureCalculator) {
-        this.tfMeasureCalculator = tfMeasureCalculator;
+    public TfWeightedArticleMeasureCalculator(TfWeightedMeasureCalculator tfWeightedMeasureCalculator) {
+        this.tfWeightedMeasureCalculator = tfWeightedMeasureCalculator;
     }
 
-    public MeasureMap calculate(ArticleDto article, int titleWage) {
-        MeasureMap titleMeasureMap = tfMeasureCalculator.calculate(article.getTitle());
-        titleMeasureMap.forEach((key, value) -> titleMeasureMap.replace(key, value, value * titleWage));
-        MeasureMap abstractMeasureMap = tfMeasureCalculator.calculate(article.getAbstractText());
+    public MeasureMap calculate(List<String> titleTerms, double titleWeight,
+                                List<String> abstractTerms, double abstractWeight) {
+        MeasureMap titleMeasureMap = tfWeightedMeasureCalculator.calculate(titleTerms, titleWeight);
+        MeasureMap abstractMeasureMap = tfWeightedMeasureCalculator.calculate(abstractTerms, abstractWeight);
         return new MeasureMap(
                 Stream.of(titleMeasureMap, abstractMeasureMap)
                         .map(Map::entrySet)

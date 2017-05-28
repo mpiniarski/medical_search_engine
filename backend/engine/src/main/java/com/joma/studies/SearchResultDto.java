@@ -1,14 +1,14 @@
 package com.joma.studies;
 
-import com.joma.studies.query.dto.QueryAnalysisDto;
+import com.joma.studies.article.relevance.dto.RatedAndMeasuredArticleDto;
 
 import java.util.List;
 
 public class SearchResultDto {
     private final QueryAnalysisDto query;
-    private final List<ArticleWithMeasureMapAndRelevanceDto> articles;
+    private final List<RatedAndMeasuredArticleDto> articles;
 
-    private SearchResultDto(QueryAnalysisDto query, List<ArticleWithMeasureMapAndRelevanceDto> articles) {
+    private SearchResultDto(QueryAnalysisDto query, List<RatedAndMeasuredArticleDto> articles) {
         this.query = query;
         this.articles = articles;
     }
@@ -17,21 +17,21 @@ public class SearchResultDto {
         return query;
     }
 
-    public List<ArticleWithMeasureMapAndRelevanceDto> getArticles() {
+    public List<RatedAndMeasuredArticleDto> getArticles() {
         return articles;
     }
 
 
     public static final class Builder {
         private QueryAnalysisDto queryAnalysisDto;
-        private List<ArticleWithMeasureMapAndRelevanceDto> articles;
+        private List<RatedAndMeasuredArticleDto> articles;
 
         public Builder withQueryAnalysisDto(QueryAnalysisDto queryAnalysisDto) {
             this.queryAnalysisDto = queryAnalysisDto;
             return this;
         }
 
-        public Builder withArticles(List<ArticleWithMeasureMapAndRelevanceDto> articles) {
+        public Builder withArticles(List<RatedAndMeasuredArticleDto> articles) {
             this.articles = articles;
             return this;
         }

@@ -1,13 +1,14 @@
 package com.joma.studies.measure;
 
-import com.joma.studies.measure.term.TermAnalyzer;
+import com.joma.studies.term.TermAnalyzer;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,7 +19,7 @@ public class IdfMeasureCalculatorTest {
 
     @Before
     public void setUp() throws Exception {
-        measureCalculator = new IdfMeasureCalculator(new TermAnalyzer(new EnglishAnalyzer()));
+        measureCalculator = new IdfMeasureCalculator();
     }
 
     @Test
@@ -29,24 +30,27 @@ public class IdfMeasureCalculatorTest {
 
     @Test
     public void testHardExample() throws Exception {
-        List<String> documents = Arrays.asList(
+        TermAnalyzer termAnalyzer = new TermAnalyzer(new EnglishAnalyzer());
+        List<List<String>> termLists = Stream.of(
                 "The game of life is a game of everlasting learning",
                 "The unexamined life is not worth living",
-                "Never stop learning"
-        );
+                "Never stop learning")
+                .map(termAnalyzer::getTerms)
+                .collect(Collectors.toList());
+
 
         MeasureMap expectedMeasureMap = new MeasureMap();
-        expectedMeasureMap.put("never", 2.098726209);
-        expectedMeasureMap.put("game", 2.098726209);
-        expectedMeasureMap.put("life", 1.405507153);
-        expectedMeasureMap.put("everlast", 2.098726209);
-        expectedMeasureMap.put("learn", 1.405507153);
-        expectedMeasureMap.put("unexamin", 2.098726209);
-        expectedMeasureMap.put("worth", 2.098726209);
-        expectedMeasureMap.put("live", 2.098726209);
-        expectedMeasureMap.put("stop", 2.098726209);
+        expectedMeasureMap.put("never", 1.098726209);
+        expectedMeasureMap.put("game", 1.098726209);
+        expectedMeasureMap.put("life", 0.405507153);
+        expectedMeasureMap.put("everlast", 1.098726209);
+        expectedMeasureMap.put("learn", 0.405507153);
+        expectedMeasureMap.put("unexamin", 1.098726209);
+        expectedMeasureMap.put("worth", 1.098726209);
+        expectedMeasureMap.put("live", 1.098726209);
+        expectedMeasureMap.put("stop", 1.098726209);
 
-        MeasureMap resultMeasureMap = measureCalculator.calculate(documents);
+        MeasureMap resultMeasureMap = measureCalculator.calculate(termLists);
 
         resultMeasureMap.forEach((key, value) ->
                 assertEquals(value, expectedMeasureMap.get(key), DELTA)

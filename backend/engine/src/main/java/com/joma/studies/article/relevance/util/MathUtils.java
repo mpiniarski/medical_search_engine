@@ -1,4 +1,4 @@
-package com.joma.studies.article.relevance;
+package com.joma.studies.article.relevance.util;
 
 import com.joma.studies.measure.MeasureMap;
 import org.springframework.stereotype.Component;

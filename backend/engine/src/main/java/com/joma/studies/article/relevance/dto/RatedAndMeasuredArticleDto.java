@@ -1,14 +1,16 @@
-package com.joma.studies;
+package com.joma.studies.article.relevance.dto;
 
 import com.joma.studies.article.dto.ArticleDto;
 import com.joma.studies.measure.MeasureMap;
 
-public class ArticleWithMeasureMapAndRelevanceDto {
+import java.util.Set;
+
+public class RatedAndMeasuredArticleDto {
     private final ArticleDto article;
     private final Double relevance;
     private final MeasureMap measureMap;
 
-    private ArticleWithMeasureMapAndRelevanceDto(ArticleDto article, Double relevance, MeasureMap measureMap) {
+    private RatedAndMeasuredArticleDto(ArticleDto article, Double relevance, MeasureMap measureMap) {
         this.article = article;
         this.relevance = relevance;
         this.measureMap = measureMap;
@@ -21,7 +23,6 @@ public class ArticleWithMeasureMapAndRelevanceDto {
     public Double getRelevance() {
         return relevance;
     }
-
 
     public MeasureMap getMeasureMap() {
         return measureMap;
@@ -42,13 +43,13 @@ public class ArticleWithMeasureMapAndRelevanceDto {
             return this;
         }
 
-        public Builder withMeasureMap(MeasureMap measureMap) {
-            this.measureMap = measureMap;
+        public Builder withMeasureMapFiltered(MeasureMap measureMap, Set<String> queryWords) {
+            this.measureMap = measureMap.filter(queryWords);
             return this;
         }
 
-        public ArticleWithMeasureMapAndRelevanceDto build() {
-            return new ArticleWithMeasureMapAndRelevanceDto(article, relevance, measureMap);
+        public RatedAndMeasuredArticleDto build() {
+            return new RatedAndMeasuredArticleDto(article, relevance, measureMap);
         }
     }
 }

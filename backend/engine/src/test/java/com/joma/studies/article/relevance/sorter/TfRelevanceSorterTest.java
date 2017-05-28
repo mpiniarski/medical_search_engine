@@ -1,11 +1,12 @@
-package com.joma.studies.article.relevance;
+package com.joma.studies.article.relevance.sorter;
 
-import com.joma.studies.ArticleWithMeasureMapAndRelevanceDto;
+import com.joma.studies.QueryAnalysisDto;
 import com.joma.studies.article.dto.ArticleDto;
+import com.joma.studies.article.relevance.dto.RatedAndMeasuredArticleDto;
+import com.joma.studies.article.relevance.sorter.distance.DocumentDistanceSorter;
 import com.joma.studies.measure.MeasureMap;
-import com.joma.studies.measure.term.TermAnalyzer;
 import com.joma.studies.measure.TfMeasureCalculator;
-import com.joma.studies.query.dto.QueryAnalysisDto;
+import com.joma.studies.term.TermAnalyzer;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,15 +17,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TfArticleRelevanceSorterTest {
+public class TfRelevanceSorterTest {
 
-    private TfArticleRelevanceSorter tfSorter;
+    private TfRelevanceSorter tfSorter;
+
     private QueryAnalysisDto query;
+
 
     @Before
     public void setUp() throws Exception {
-        tfSorter = new TfArticleRelevanceSorter(new DocumentDistanceSorter(),
-                new TfMeasureCalculator(new TermAnalyzer(new EnglishAnalyzer()))
+        tfSorter = new TfRelevanceSorter(new DocumentDistanceSorter(),
+                new TfMeasureCalculator(),
+                new TermAnalyzer(new EnglishAnalyzer())
         );
         MeasureMap queryTermFrequency = new MeasureMap();
         queryTermFrequency.put("cancer", 1.);
@@ -34,10 +38,10 @@ public class TfArticleRelevanceSorterTest {
                 .build();
     }
 
-    private List<ArticleDto> getArticles(List<ArticleWithMeasureMapAndRelevanceDto> articlesWithRelevance) {
+    private List<ArticleDto> getArticles(List<RatedAndMeasuredArticleDto> articlesWithRelevance) {
         return articlesWithRelevance
                 .stream()
-                .map(ArticleWithMeasureMapAndRelevanceDto::getArticle)
+                .map(RatedAndMeasuredArticleDto::getArticle)
                 .collect(Collectors.toList());
     }
 

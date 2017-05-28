@@ -7,19 +7,19 @@ import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
-public class TfMeasureCalculatorTest {
+public class TfSquaredMeasureCalculatorTest {
 
-    private TfMeasureCalculator measureCalculator;
+    private TfSquaredMeasureCalculator measureCalculator;
 
     @Before
     public void setUp() throws Exception {
-        measureCalculator = new TfMeasureCalculator();
+        measureCalculator = new TfSquaredMeasureCalculator(new TfMeasureCalculator());
     }
 
     @Test
-    public void shouldCountTerms() throws Exception {
+    public void shouldCountTermsAndSquare() throws Exception {
         MeasureMap expected = new MeasureMap();
-        expected.put("cancer", 2.0);
+        expected.put("cancer", 4.0);
         expected.put("lung", 1.0);
 
         assertEquals(

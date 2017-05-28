@@ -1,6 +1,6 @@
-package com.joma.studies.measure.term;
+package com.joma.studies.term;
 
-import com.joma.studies.measure.exception.MeasureCalculationException;
+import com.joma.studies.term.exception.TermAnalyzerException;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
@@ -21,7 +21,7 @@ public class TermAnalyzer {
         this.analyzer = analyzer;
     }
 
-    public List<String> getTermList(String text) {
+    public List<String> getTerms(String text) {
         try {
             List<String> result = new ArrayList<>();
             TokenStream tokenStream = analyzer.tokenStream(null, text);
@@ -34,7 +34,7 @@ public class TermAnalyzer {
             tokenStream.close();
             return result;
         } catch (IOException exception) {
-            throw new MeasureCalculationException(text, exception);
+            throw new TermAnalyzerException(text, exception);
         }
     }
 }

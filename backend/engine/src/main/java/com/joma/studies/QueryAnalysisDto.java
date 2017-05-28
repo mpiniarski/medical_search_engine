@@ -1,4 +1,4 @@
-package com.joma.studies.query.dto;
+package com.joma.studies;
 
 import com.joma.studies.measure.MeasureMap;
 
