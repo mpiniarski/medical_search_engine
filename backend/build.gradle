@@ -2,5 +2,4 @@ apply plugin: 'java'
 
 allprojects {
     group = 'com.joma.studies'
-    version = '1.0-SNAPSHOT'
 }

@@ -26,18 +26,18 @@ public class IndexArticleObserver implements Observer<ArticleDto> {
         this.articleMapper = articleMapper;
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
         indexWriter = new IndexWriter(directory, config);
+        articlesRead = 0L;
     }
 
     @Override
     public void accept(Observable<ArticleDto> observable, ArticleDto item) {
-        articlesRead = 0L;
         try {
             indexWriter.addDocument(
                     articleMapper.toDocument(item)
             );
             articlesRead += 1;
             if(articlesRead % 100 == 0){
-                logger.info("Added" + articlesRead + "documents to index");
+                logger.info("Added " + articlesRead + " documents to index");
             }
         } catch (IOException exception) {
             logger.warn("Unable to index document. Cause: " + exception.getMessage());
