@@ -15,12 +15,20 @@ export class TokenComponent implements OnInit {
 
     ngOnInit() { }
 
-    subtract(index) {
+    subtract(index): void {
         if (this.number[index] > 1) this.number[index]--;
     }
 
-    add(index) {
+    add(index): void {
         this.number[index]++;
     }
 
+    getTokensWithWeights(): Object {
+        let tokensMap: Object = {};
+        for (var i in this.tokens) {
+            tokensMap[this.tokens[i]] = this.number[i];
+        }
+
+        return tokensMap;
+    }
 }

@@ -13,4 +13,8 @@ export class AppStore {
     getArticles(body: Object): Observable<any> {
         return this.appAsyncs.getArticles(body);
     }
+
+    getArticlesWithWeights(body: Object): Observable<any> {
+        return this.appAsyncs.getArticlesWithWeights(body);
+    }
 }
