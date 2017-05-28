@@ -23,14 +23,14 @@ public class IdfMeasureCalculator implements RelativeMeasureCalculator {
 
     @Override
     public MeasureMap calculate(List<String> texts) throws MeasureCalculationException {
-        Map<String, Long> wordInNumberOfDocuments = texts.stream()
+        Map<String, Long> termInNumberOfDocuments = texts.stream()
                 .map(termAnalyzer::getTermList)
                 .map(HashSet::new)
                 .flatMap(Set::stream)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         MeasureMap idfMeasureMap = new MeasureMap();
-        wordInNumberOfDocuments.forEach((key, value) ->
+        termInNumberOfDocuments.forEach((key, value) ->
                 //TODO it this +1 ok?
                 idfMeasureMap.put(key, Math.log(texts.size() / value.doubleValue()) + 1)
         );

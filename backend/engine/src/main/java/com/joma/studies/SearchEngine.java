@@ -35,7 +35,7 @@ public class SearchEngine {
     public SearchResultDto search(String query, SimpleMeasureCalculator queryMeasureCalculator, ArticleRelevanceSorter articleRelevanceSorter) throws RepositoryException {
         return search(new QueryAnalysisDto.Builder()
                         .withQuery(query)
-                        .withTermFrequency(queryMeasureCalculator.calculate(query))
+                        .withMeasureMap(queryMeasureCalculator.calculate(query))
                         .build(),
                 articleRelevanceSorter);
     }

@@ -29,7 +29,7 @@ public class QueryAnalysisDto {
             return this;
         }
 
-        public Builder withTermFrequency(MeasureMap measureMap) {
+        public Builder withMeasureMap(MeasureMap measureMap) {
             this.measureMap = measureMap;
             return this;
         }

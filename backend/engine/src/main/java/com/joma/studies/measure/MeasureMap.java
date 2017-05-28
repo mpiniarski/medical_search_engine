@@ -7,16 +7,4 @@ public class MeasureMap extends HashMap<String, Double> implements Map<String,Do
     public MeasureMap() {
         super();
     }
-
-    public MeasureMap(Map<? extends String, ? extends Double> map) {
-        super(map);
-    }
-
-    public MeasureMap(int i, float v) {
-        super(i, v);
-    }
-
-    public MeasureMap(int i) {
-        super(i);
-    }
 }

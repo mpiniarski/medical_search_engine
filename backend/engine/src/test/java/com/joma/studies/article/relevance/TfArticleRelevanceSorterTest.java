@@ -30,7 +30,7 @@ public class TfArticleRelevanceSorterTest {
         queryTermFrequency.put("cancer", 1.);
         query = new QueryAnalysisDto.Builder()
                 .withQuery("cancer")
-                .withTermFrequency(queryTermFrequency)
+                .withMeasureMap(queryTermFrequency)
                 .build();
     }
 
