@@ -7,8 +7,10 @@
             <div>{{article.article.abstractText | ellipsis:350}}</div>
         </mdl-card-supporting-text>
         <mdl-card-supporting-text [hidden]="!expand[index]">
-            <!--<div class="mdl-card__text">Date: {{article.date}}</div>-->
-            <!--<div class="mdl-card__text">Author: {{article.author}}</div>-->
+            <div [hidden]="!article.article.date" class="mdl-card__text">Date: {{article.article.date}}</div>
+            <div [hidden]="!article.article.authors.length" class="mdl-card__text">
+                Authors: <span *ngFor="let author of article.article.authors; let last = last" [class.authors-spacer]="!last">{{author}}</span>
+            </div>
             <div>{{article.article.abstractText}}</div>
         </mdl-card-supporting-text>
         <mdl-card-actions mdl-card-border>

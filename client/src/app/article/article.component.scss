@@ -16,5 +16,11 @@ $mdl-card__text-color: #333;
 
 .mdl-card__text {
     color: $mdl-card__text-color;
-    line-height: 14px;
+    margin-bottom: 5px;
+}
+
+.authors-spacer {
+    &:after {
+        content: ", "
+    }
 }
