@@ -7,6 +7,7 @@ import { Http,  RequestOptions, URLSearchParams } from '@angular/http';
 export class AppAsyncs {
 
     articlesUrl: string = 'v1/search/query';
+    articlesWithWeightsUrl: string = 'v1/search/term';
 
     constructor(
         private http: Http
@@ -14,6 +15,11 @@ export class AppAsyncs {
 
     getArticles(body: Object): Observable<any> {
         return this.http.post(this.articlesUrl, body)
+                        .map((res) => res.json());
+    }
+
+    getArticlesWithWeights(body: Object): Observable<any> {
+        return this.http.post(this.articlesWithWeightsUrl, body)
                         .map((res) => res.json());
     }
 }
