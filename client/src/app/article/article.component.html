@@ -18,13 +18,14 @@
             <button [hidden]="!expand[index]" (click)="expandArticle(index)" mdl-button mdl-colored="primary" mdl-ripple>View less</button>
         </mdl-card-actions>
         <mdl-card-menu>
-            <button [hidden]="starred[index]" (click)="rateArticle(index)" mdl-button mdl-colored="accent" mdl-button-type="icon"
-                mdl-ripple>
-                <mdl-icon>star_border</mdl-icon>
+            <button (click)="rateNegative(index)" [class.rated-negative]="starred[index] === false" mdl-button mdl-button-type="icon" mdl-ripple>
+                <mdl-icon>thumb_down</mdl-icon>
             </button>
-            <button [hidden]="!starred[index]" (click)="rateArticle(index)" mdl-button mdl-colored="accent" mdl-button-type="icon"
-                mdl-ripple>
-                <mdl-icon>star</mdl-icon>
+            <button (click)="rateNeutral(index)" [class.rated-neutral]="starred[index] === undefined" mdl-button mdl-button-type="icon" mdl-ripple>
+                <mdl-icon>thumbs_up_down</mdl-icon>
+            </button>
+            <button (click)="ratePositive(index)" [class.rated-positive]="starred[index]" mdl-button mdl-button-type="icon" mdl-ripple>
+                <mdl-icon>thumb_up</mdl-icon>
             </button>
         </mdl-card-menu>
     </mdl-card>

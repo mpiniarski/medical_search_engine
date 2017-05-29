@@ -4,6 +4,6 @@ export function watchArticles(store, body: Object): BehaviorSubject<any> {
     return store.getArticles(body);
 }
 
-export function watchArticlesWithWeights(store, body: Object): BehaviorSubject<any> {
-    return store.getArticlesWithWeights(body);
+export function watchArticlesWithDecisionSupport(store, body: Object): BehaviorSubject<any> {
+    return store.getArticlesWithDecisionSupport(body);
 }

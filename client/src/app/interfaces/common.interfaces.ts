@@ -1,12 +1,16 @@
 export interface SearchBody {
-    query: string;
+    queryText: string;
     sortingAlgorithm: string;
 }
 
-export interface SearchBodyWithWeights {
-    query: string;
+export interface SearchBodyWithDecisionSupport {
+    query: QueryWithDecisionSupport;
     sortingAlgorithm: string;
-    weights: Object;
-    positiveArticles: Object[];
-    negativeArticles: Object[];
+}
+
+export interface QueryWithDecisionSupport {
+    queryText: string,
+    weights: Object,
+    positiveArticles: Object[],
+    negativeArticles: Object[]
 }

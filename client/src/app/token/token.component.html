@@ -1,6 +1,6 @@
 <div class="mdl-cell mdl-cell--center mdl-cell--12-col">
     <span *ngFor="let token of tokens; let index = index;" class="token">
-        <span [mdl-badge]="number[index]" mdl-badge-overlap>
+        <span [mdl-badge]="numbers[index]" mdl-badge-overlap>
             <span class="mdl-chip mdl-chip--deletable">
                 <button (click)="subtract(index)" type="button" class="mdl-chip__action mdl-chip__action--left">
                     <i class="material-icons">remove_circle</i>
