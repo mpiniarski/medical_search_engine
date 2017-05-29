@@ -17,6 +17,7 @@ import { ArticleComponent } from '../article/article.component';
 export class SearchBoxComponent implements OnInit {
 
     private query: string;
+    private loading: boolean = false;
     articles: Object[] = [];
     tokens: string[] = [];
 
@@ -62,21 +63,25 @@ export class SearchBoxComponent implements OnInit {
     }
 
     private watchArticles(body: Object): void {
+        this.loading = true;
         this.resetData();
         this.resetSettings();
         watchers.watchArticles(this.appStore, body).subscribe(response => {
             this.articles = response.articles;
             this.tokens = this.getTokens(response.query.measureMap);
             this.tokenComponent.initTokensNumbers(this.tokens.length);
+            this.loading = false;
         });
     }
 
     private watchArticlesWithDecisionSupport(body: Object): void {
+        this.loading = true;
         this.resetData();
         watchers.watchArticlesWithDecisionSupport(this.appStore, body).subscribe(response => {
             this.articleComponent.resetArticlesSettings();
             this.articles = response.articles;
             this.tokens = this.getTokens(response.query.measureMap);
+            this.loading = false;
         });
     }
 

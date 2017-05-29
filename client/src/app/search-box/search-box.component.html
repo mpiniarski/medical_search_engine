@@ -4,6 +4,9 @@
         <mdl-icon>search</mdl-icon>
     </button>
 </div>
+<div *ngIf="loading" class="mdl-cell mdl-cell--center mdl-cell--12-col">
+    <mdl-spinner single-color [active]="loading"></mdl-spinner>
+</div>
 <app-token #tokenComponent [tokens]="tokens"></app-token>
 <div class="mdl-cell mdl-cell--center mdl-cell--12-col"></div>
 <div class="mdl-cell mdl-cell--center mdl-cell--12-col"></div>
