@@ -14,6 +14,7 @@ import { TokenComponent } from './token/token.component';
 import { AppStore } from './appStore/app.store';
 import { AppAsyncs } from './appStore/app.asyncs';
 import { AlgorithmDropdownComponent } from './algorithm-dropdown/algorithm-dropdown.component';
+import { FloatingPointPipe } from './floating-point.pipe';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,8 @@ import { AlgorithmDropdownComponent } from './algorithm-dropdown/algorithm-dropd
         ArticleComponent,
         SearchBoxComponent,
         TokenComponent,
-        AlgorithmDropdownComponent
+        AlgorithmDropdownComponent,
+        FloatingPointPipe
     ],
     imports: [
         BrowserModule,

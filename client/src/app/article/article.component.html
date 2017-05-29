@@ -27,6 +27,7 @@
             <button (click)="ratePositive(index)" [class.rated-positive]="starred[index]" mdl-button mdl-button-type="icon" mdl-ripple>
                 <mdl-icon>thumb_up</mdl-icon>
             </button>
+            <p class="mdl-card__number-text">{{article.relevance | floatingPoint:7}}</p>
         </mdl-card-menu>
     </mdl-card>
 </div>
