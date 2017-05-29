@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull
 data class QuerySearchRequest(
         @field:NotNull
         @field:NotBlank
-        val query: String,
+        val queryText: String,
         @field:NotNull
         val sortingAlgorithm: SortingAlgorithm)
 

@@ -2,9 +2,53 @@ package com.joma.studies.measure;
 
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.Assert.assertEquals;
 
 public class MeasureMapTest {
+
+    @Test
+    public void shouldRiseWeights() throws Exception {
+        //Given
+        MeasureMap original= new MeasureMap();
+        original.put("lung", 2.0);
+        original.put("cancer", 3.0);
+
+        Map<String, Integer> weights = new HashMap<>();
+        weights.put("lung", 3);
+        weights.put("cancer", 1);
+
+        //When
+        original.riseWeights(weights);
+
+        //Then
+        MeasureMap expected = new MeasureMap();
+        expected.put("lung", 6.0);
+        expected.put("cancer", 3.0);
+        assertEquals(expected, original);
+    }
+
+    @Test
+    public void shouldNotChange_WhenWeightOfTermNotFound() throws Exception {
+        //Given
+        MeasureMap original= new MeasureMap();
+        original.put("lung", 2.0);
+        original.put("cancer", 3.0);
+
+        Map<String, Integer> weights = new HashMap<>();
+
+        //When
+        original.riseWeights(weights);
+
+        //Then
+        MeasureMap expected = new MeasureMap();
+        expected.put("lung", 2.0);
+        expected.put("cancer", 3.0);
+        assertEquals(expected, original);
+    }
+
     @Test
     public void shouldNormalize() throws Exception {
         //Given

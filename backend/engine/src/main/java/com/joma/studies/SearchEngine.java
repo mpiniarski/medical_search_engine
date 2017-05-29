@@ -38,13 +38,32 @@ public class SearchEngine {
                 .build();
     }
 
-    public SearchResultDto search(String query, RelevanceSorter relevanceSorter) throws RepositoryException {
+    public SearchResultDto search(String queryText, RelevanceSorter relevanceSorter) throws RepositoryException {
+        MeasureMap queryMeasureMap = calculateQueryMeasureMap(queryText);
+
+        QueryAnalysisDto queryAnalysisDto = new QueryAnalysisDto.Builder()
+                .withQuery(queryText)
+                .withMeasureMap(queryMeasureMap)
+                .build();
+        return search(queryAnalysisDto, relevanceSorter);
+    }
+
+    public SearchResultDto search(DecisionSupportQueryDto query, RelevanceSorter relevanceSorter)
+            throws RepositoryException {
+        MeasureMap queryMeasureMap = calculateQueryMeasureMap(query.getQueryText());
+
+        queryMeasureMap.riseWeights(query.getWeights());
+
+        QueryAnalysisDto queryAnalysisDto = new QueryAnalysisDto.Builder()
+                .withQuery(query.getQueryText())
+                .withMeasureMap(queryMeasureMap)
+                .build();
+        return search(queryAnalysisDto, relevanceSorter);
+
+    }
+
+    private MeasureMap calculateQueryMeasureMap(String query) {
         List<String> queryTerms = termAnalyzer.getTerms(query);
-        MeasureMap queryMeasureMap = tfMeasureCalculator.calculate(queryTerms);
-        return search(new QueryAnalysisDto.Builder()
-                        .withQuery(query)
-                        .withMeasureMap(queryMeasureMap)
-                        .build(),
-                relevanceSorter);
+        return tfMeasureCalculator.calculate(queryTerms);
     }
 }

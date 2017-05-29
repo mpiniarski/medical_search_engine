@@ -21,6 +21,13 @@ public class MeasureMap extends HashMap<String, Double> implements Map<String, D
         return this;
     }
 
+    public MeasureMap riseWeights(Map<String, Integer> weights) {
+        this.replaceAll((key, value) ->
+                value * weights.getOrDefault(key, 1)
+        );
+        return this;
+    }
+
     public MeasureMap filter(Set<String> keys) {
         this.keySet().retainAll(keys);
         return this;
