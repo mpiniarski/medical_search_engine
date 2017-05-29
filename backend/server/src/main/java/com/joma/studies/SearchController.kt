@@ -1,7 +1,8 @@
 package com.joma.studies
+
 import com.joma.studies.search.ArticleRelevanceSorterFactory
-import com.joma.studies.search.query.DecisionSupportSearchRequest
-import com.joma.studies.search.query.QuerySearchRequest
+import com.joma.studies.search.query.SearchRequest
+import com.joma.studies.search.query.decision.DecisionSupportSearchRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -17,15 +18,24 @@ class SearchController
         val searchEngine: SearchEngine
 ) {
     @RequestMapping(method = arrayOf(POST))
-    fun searchByQuery(@Valid @RequestBody request: QuerySearchRequest) : SearchResultDto {
-        val articleImportanceSorter = articleRelevanceSorterFactory.getSorter(request.sortingAlgorithm)
-        return searchEngine.search(request.queryText, articleImportanceSorter)
+    fun searchByQuery(@Valid @RequestBody request: SearchRequest): SearchResultDto {
+        val articleImportanceSorter = articleRelevanceSorterFactory
+                .getSorter(request.sortingAlgorithm)
+        return searchEngine.search(
+                request.queryText,
+                articleImportanceSorter)
     }
 
     @RequestMapping(value = "/decision-support", method = arrayOf(POST))
-    fun search(@Valid @RequestBody request: DecisionSupportSearchRequest) : SearchResultDto {
-        val articleImportanceSorter = articleRelevanceSorterFactory.getSorter(request.sortingAlgorithm)
-        return searchEngine.search(request.query, articleImportanceSorter)
+    fun search(@Valid @RequestBody request: DecisionSupportSearchRequest): SearchResultDto {
+        val articleImportanceSorter = articleRelevanceSorterFactory
+                .getSorter(request.sortingAlgorithm)
+        return searchEngine.search(
+                request.query.queryText,
+                request.query.weights,
+                request.query.positiveArticles,
+                request.query.negativeArticles,
+                articleImportanceSorter)
     }
 }
 

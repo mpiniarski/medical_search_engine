@@ -12,10 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @Component
 public class SearchEngine {
+
+    private static final double ORIGINAL_MAP_WEIGHT = 1.0;
+    private static final double POSITIVE_MAPS_WEIGHT = 0.8;
+    private static final double NEGATIVE_MAPS_WEIGHT = 0.1;
 
     private final ArticleRepository articleRepository;
     private final TfMeasureCalculator tfMeasureCalculator;
@@ -48,14 +53,21 @@ public class SearchEngine {
         return search(queryAnalysisDto, relevanceSorter);
     }
 
-    public SearchResultDto search(DecisionSupportQueryDto query, RelevanceSorter relevanceSorter)
-            throws RepositoryException {
-        MeasureMap queryMeasureMap = calculateQueryMeasureMap(query.getQueryText());
+    public SearchResultDto search(String queryText,
+                                  Map<String, Integer> weights,
+                                  List<MeasureMap> positiveArticleMeasureMaps,
+                                  List<MeasureMap> negativeArticleMeasureMaps,
+                                  RelevanceSorter relevanceSorter) throws RepositoryException {
+        MeasureMap queryMeasureMap = calculateQueryMeasureMap(queryText)
+                .rocchioTransform(ORIGINAL_MAP_WEIGHT,
+                        positiveArticleMeasureMaps, POSITIVE_MAPS_WEIGHT,
+                        negativeArticleMeasureMaps, NEGATIVE_MAPS_WEIGHT)
+                .riseWeights(weights);
 
-        queryMeasureMap.riseWeights(query.getWeights());
+        queryMeasureMap.riseWeights(weights);
 
         QueryAnalysisDto queryAnalysisDto = new QueryAnalysisDto.Builder()
-                .withQuery(query.getQueryText())
+                .withQuery(queryText)
                 .withMeasureMap(queryMeasureMap)
                 .build();
         return search(queryAnalysisDto, relevanceSorter);

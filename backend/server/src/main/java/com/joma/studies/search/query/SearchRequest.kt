@@ -5,7 +5,7 @@ import org.hibernate.validator.constraints.NotBlank
 import javax.validation.constraints.NotNull
 
 
-data class QuerySearchRequest(
+data class SearchRequest(
         @field:NotNull
         @field:NotBlank
         val queryText: String,

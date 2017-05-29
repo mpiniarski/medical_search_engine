@@ -1,7 +1,7 @@
 package com.joma.studies.article.relevance.sorter.distance;
 
-import com.joma.studies.article.relevance.dto.RatedAndMeasuredArticleDto;
 import com.joma.studies.article.relevance.dto.MeasuredArticleDto;
+import com.joma.studies.article.relevance.dto.RatedAndMeasuredArticleDto;
 import com.joma.studies.measure.MeasureMap;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +17,11 @@ public class DocumentDistanceSorter {
             (article1, article2) -> Double.compare(article2.getRelevance(), article1.getRelevance());
 
     public List<RatedAndMeasuredArticleDto> sort(MeasureMap queryMeasureMap, List<MeasuredArticleDto> articles) {
+        queryMeasureMap.normalize();
+        articles.forEach(article ->
+                article.getMeasureMap()
+                        .normalize()
+        );
         return articles.stream()
                 .map(article -> new RatedAndMeasuredArticleDto.Builder()
                         .withArticle(article.getArticleDto())
