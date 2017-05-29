@@ -31,5 +31,5 @@ dependencies {
 
 }
 
-mainClassName = 'com.joma.studies.MainKt'
+mainClassName = 'com.joma.studies.AppKt'
 
