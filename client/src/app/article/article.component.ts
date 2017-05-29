@@ -11,51 +11,107 @@ export class ArticleComponent implements OnInit {
 
     private starred: boolean[] = [];
     private expand: boolean[] = [];
+    private pageNumber: number = 0;
+    private pageArticles: Object[] = [];
     positiveArticles: Object[] = [];
     negativeArticles: Object[] = [];
 
     @Input() articles;
+    @Input() pageLength;
 
     constructor() { }
 
     ngOnInit() { }
 
+    private isLastPage(): boolean {
+        return this.getLastPageNumber() === this.pageNumber;
+    }
+
+    private getLastPageNumber(): number {
+        return Math.ceil(this.articles.length / this.pageLength) - 1;
+    }
+
+    private nextPage(): void {
+        const lastPage = this.getLastPageNumber();
+        if (lastPage > this.pageNumber) {
+            this.pageNumber++;
+            this.changePageArticles(this.pageNumber);
+        }
+    }
+
+    private previousPage(): void {
+        if (this.pageNumber > 0) {
+            this.pageNumber--;
+            this.changePageArticles(this.pageNumber);
+        }
+    }
+
+    private isExpanded(index: number): boolean {
+        const globalIndex = this.getGlobalIndex(index);
+        return this.expand[globalIndex];
+    }
+
+    private isStarred(index: number): boolean {
+        const globalIndex = this.getGlobalIndex(index);
+        return this.starred[globalIndex];
+    }
+
+    private changePageArticles(pageNumber: number): void {
+        this.pageArticles = this.articles.slice(pageNumber * this.pageLength, (pageNumber + 1) * this.pageLength);
+    }
+
+    public setPageArticles(articles: Object[]): void {
+        this.pageArticles = articles;
+    }
+
+    public setPageNumber(number: number): void {
+        this.pageNumber = number;
+    }
+
+    private getGlobalIndex(index): number {
+        return this.pageNumber * this.pageLength + index;
+    }
+
     private expandArticle(index): void {
-        this.expand[index] === true ? this.expand[index] = false : this.expand[index] = true;
+        const globalIndex = this.getGlobalIndex(index);
+        this.expand[globalIndex] === true ? this.expand[globalIndex] = false : this.expand[globalIndex] = true;
     }
 
     private ratePositive(index): void {
-        if (this.starred[index] !== true) {
-            if (this.starred[index] === false) {
-                const articleIndex = this.negativeArticles.indexOf(this.articles[index].measureMap);
+        const globalIndex = this.getGlobalIndex(index);
+        if (this.starred[globalIndex] !== true) {
+            if (this.starred[globalIndex] === false) {
+                const articleIndex = this.negativeArticles.indexOf(this.articles[globalIndex].measureMap);
                 this.negativeArticles.splice(articleIndex, 1);
             }
-            this.positiveArticles.push(this.articles[index].measureMap);
-            this.starred[index] = true;
+            this.positiveArticles.push(this.articles[globalIndex].measureMap);
+            this.starred[globalIndex] = true;
         }
     }
 
     private rateNegative(index): void {
-        if (this.starred[index] !== false) {
-            if (this.starred[index] === true) {
-                const articleIndex = this.positiveArticles.indexOf(this.articles[index].measureMap);
+        const globalIndex = this.getGlobalIndex(index);
+        if (this.starred[globalIndex] !== false) {
+            if (this.starred[globalIndex] === true) {
+                const articleIndex = this.positiveArticles.indexOf(this.articles[globalIndex].measureMap);
                 this.positiveArticles.splice(articleIndex, 1);
             }
-            this.negativeArticles.push(this.articles[index].measureMap);
-            this.starred[index] = false;
+            this.negativeArticles.push(this.articles[globalIndex].measureMap);
+            this.starred[globalIndex] = false;
         }
     }
 
     private rateNeutral(index): void {
-        if (this.starred[index] !== undefined) {
-            if (this.starred[index] === false) {
-                const articleIndex = this.negativeArticles.indexOf(this.articles[index].measureMap);
+        const globalIndex = this.getGlobalIndex(index);
+        if (this.starred[globalIndex] !== undefined) {
+            if (this.starred[globalIndex] === false) {
+                const articleIndex = this.negativeArticles.indexOf(this.articles[globalIndex].measureMap);
                 this.negativeArticles.splice(articleIndex, 1);
-            } else if (this.starred[index] === true) {
-                const articleIndex = this.positiveArticles.indexOf(this.articles[index].measureMap);
+            } else if (this.starred[globalIndex] === true) {
+                const articleIndex = this.positiveArticles.indexOf(this.articles[globalIndex].measureMap);
                 this.positiveArticles.splice(articleIndex, 1);
             }
-            this.starred[index] = undefined;
+            this.starred[globalIndex] = undefined;
         }
     }
 
@@ -76,5 +132,6 @@ export class ArticleComponent implements OnInit {
 
     public resetArticles(): void {
         this.articles = [];
+        this.pageArticles = [];
     }
 }

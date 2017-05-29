@@ -18,6 +18,7 @@ export class SearchBoxComponent implements OnInit {
 
     private query: string;
     private loading: boolean = false;
+    private pageLength: number = 10;
     articles: Object[] = [];
     tokens: string[] = [];
 
@@ -68,6 +69,7 @@ export class SearchBoxComponent implements OnInit {
         this.resetSettings();
         watchers.watchArticles(this.appStore, body).subscribe(response => {
             this.articles = response.articles;
+            this.setPageArticles(0);
             this.tokens = this.getTokens(response.query.measureMap);
             this.tokenComponent.initTokensNumbers(this.tokens.length);
             this.loading = false;
@@ -80,9 +82,16 @@ export class SearchBoxComponent implements OnInit {
         watchers.watchArticlesWithDecisionSupport(this.appStore, body).subscribe(response => {
             this.articleComponent.resetArticlesSettings();
             this.articles = response.articles;
+            this.setPageArticles(0);
             this.tokens = this.getTokens(response.query.measureMap);
             this.loading = false;
         });
+    }
+
+    public setPageArticles(page: number): void {
+        this.articleComponent.setPageNumber(page);
+        const pageArticles = this.articles.slice(page, this.pageLength);
+        this.articleComponent.setPageArticles(pageArticles);
     }
 
     private getTokens(object: Object[]): string[] {

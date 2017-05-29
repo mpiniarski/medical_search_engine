@@ -1,12 +1,12 @@
-<div class="mdl-cell mdl-cell--center mdl-cell--12-col" *ngFor="let article of articles; let index = index;">
+<div class="mdl-cell mdl-cell--center mdl-cell--12-col" *ngFor="let article of pageArticles; let index = index;">
     <mdl-card mdl-shadow="3">
         <mdl-card-title>
             <h2 mdl-card-title-text>{{article.article.title}}</h2>
         </mdl-card-title>
-        <mdl-card-supporting-text [hidden]="expand[index]">
+        <mdl-card-supporting-text [hidden]="isExpanded(index)">
             <div>{{article.article.abstractText | ellipsis:350}}</div>
         </mdl-card-supporting-text>
-        <mdl-card-supporting-text [hidden]="!expand[index]">
+        <mdl-card-supporting-text [hidden]="!isExpanded(index)">
             <div [hidden]="!article.article.date" class="mdl-card__text">Date: {{article.article.date}}</div>
             <div [hidden]="!article.article.authors.length" class="mdl-card__text">
                 Authors: <span *ngFor="let author of article.article.authors; let last = last" [class.authors-spacer]="!last">{{author}}</span>
@@ -14,20 +14,30 @@
             <div>{{article.article.abstractText}}</div>
         </mdl-card-supporting-text>
         <mdl-card-actions mdl-card-border>
-            <button [hidden]="expand[index]" (click)="expandArticle(index)" mdl-button mdl-colored="primary" mdl-ripple>View more</button>
-            <button [hidden]="!expand[index]" (click)="expandArticle(index)" mdl-button mdl-colored="primary" mdl-ripple>View less</button>
+            <button [hidden]="isExpanded(index)" (click)="expandArticle(index)" mdl-button mdl-colored="primary" mdl-ripple>View more</button>
+            <button [hidden]="!isExpanded(index)" (click)="expandArticle(index)" mdl-button mdl-colored="primary" mdl-ripple>View less</button>
         </mdl-card-actions>
         <mdl-card-menu>
-            <button (click)="rateNegative(index)" [class.rated-negative]="starred[index] === false" mdl-button mdl-button-type="icon" mdl-ripple>
+            <button (click)="rateNegative(index)" [class.rated-negative]="isStarred(index) === false" mdl-button mdl-button-type="icon"
+                mdl-ripple>
                 <mdl-icon>thumb_down</mdl-icon>
             </button>
-            <button (click)="rateNeutral(index)" [class.rated-neutral]="starred[index] === undefined" mdl-button mdl-button-type="icon" mdl-ripple>
+            <button (click)="rateNeutral(index)" [class.rated-neutral]="isStarred(index) === undefined" mdl-button mdl-button-type="icon"
+                mdl-ripple>
                 <mdl-icon>thumbs_up_down</mdl-icon>
             </button>
-            <button (click)="ratePositive(index)" [class.rated-positive]="starred[index]" mdl-button mdl-button-type="icon" mdl-ripple>
+            <button (click)="ratePositive(index)" [class.rated-positive]="isStarred(index)" mdl-button mdl-button-type="icon" mdl-ripple>
                 <mdl-icon>thumb_up</mdl-icon>
             </button>
             <p class="mdl-card__number-text">{{article.relevance | floatingPoint:7}}</p>
         </mdl-card-menu>
     </mdl-card>
+</div>
+<div [hidden]="!pageArticles.length || isLastPage()" class="mdl-cell mdl-cell--center mdl-cell--12-col">
+    <button (click)="previousPage()" mdl-button mdl-ripple mdl-colored="primary">
+        <mdl-icon>keyboard_arrow_left</mdl-icon>
+    </button>
+    <button (click)="nextPage()" mdl-button mdl-ripple mdl-colored="primary">
+        <mdl-icon>keyboard_arrow_right</mdl-icon>
+    </button>
 </div>
