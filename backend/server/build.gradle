@@ -26,7 +26,9 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
     compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.8.7"
 
-    testCompile 'junit:junit:4.12'
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
+
 }
 
 mainClassName = 'com.joma.studies.MainKt'
