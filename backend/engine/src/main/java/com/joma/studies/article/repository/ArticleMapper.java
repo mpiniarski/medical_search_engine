@@ -10,6 +10,7 @@ import java.util.Arrays;
 @Component
 public class ArticleMapper {
 
+    private static final String ID = "id";
     private static final String TITLE = "title";
     private static final String ABSTRACT = "abstractText";
     private static final String AUTHORS = "authors";
@@ -19,6 +20,7 @@ public class ArticleMapper {
 
     ArticleDto toArticleDto(Document document) throws ArticleBuildingException {
         return new ArticleDto.Builder()
+                .withId(Long.valueOf(document.get(ID)))
                 .withTitle(document.get(TITLE))
                 .withAbstractText(document.get(ABSTRACT))
                 .withAuthors(Arrays.asList(

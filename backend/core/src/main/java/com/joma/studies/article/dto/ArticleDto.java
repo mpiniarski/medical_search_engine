@@ -4,16 +4,22 @@ package com.joma.studies.article.dto;
 import java.util.List;
 
 public class ArticleDto {
+    private final Long id;
     private final String title;
     private final String abstractText;
     private final List<String> authors;
     private final String date;
 
-    private ArticleDto(String title, String abstractText, List<String> authors, String date) {
+    private ArticleDto(Long id, String title, String abstractText, List<String> authors, String date) {
+        this.id = id;
         this.title = title;
         this.abstractText = abstractText;
         this.authors = authors;
         this.date = date;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -32,7 +38,6 @@ public class ArticleDto {
         return date;
     }
 
-    //TODO right place for it?
     @Override
     public String toString() {
         return title + " " + abstractText;
@@ -40,10 +45,16 @@ public class ArticleDto {
 
 
     public static final class Builder {
+        private Long id;
         private String title;
         private String abstractText;
         private List<String> authors;
         private String date;
+
+        public Builder withId(Long id) {
+            this.id = id;
+            return this;
+        }
 
         public Builder withTitle(String title) {
             this.title = title;
@@ -66,7 +77,7 @@ public class ArticleDto {
         }
 
         public ArticleDto build() {
-            return new ArticleDto(title, abstractText, authors, date);
+            return new ArticleDto(id, title, abstractText, authors, date);
         }
     }
 }
