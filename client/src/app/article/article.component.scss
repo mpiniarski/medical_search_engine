@@ -1,4 +1,7 @@
 $mdl-card__text-color: #333;
+$primary-color: #00bcd4;
+$color-red: #f44336;
+$color-light-green: #8bc34a;
 
 .mdl-cell--center {
     display: flex;
@@ -11,7 +14,7 @@ $mdl-card__text-color: #333;
 }
 
 .mdl-card__title-text {
-    width: 95%;
+    width: 88%;
 }
 
 .mdl-card__text {
@@ -19,8 +22,27 @@ $mdl-card__text-color: #333;
     margin-bottom: 5px;
 }
 
+.mdl-card__number-text {
+    font-size: 24px;
+    font-weight: 300;
+    margin: 0;
+    text-align: right;
+}
+
 .authors-spacer {
     &:after {
         content: ", "
     }
+}
+
+.rated-neutral {
+    color: $primary-color;
+}
+
+.rated-positive {
+    color: $color-light-green;
+}
+
+.rated-negative {
+    color: $color-red;
 }

@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TokenComponent implements OnInit {
 
-    private number: number[] = [1, 1, 1, 1, 1];
+    numbers: number[];
 
     @Input() tokens;
 
@@ -15,20 +15,32 @@ export class TokenComponent implements OnInit {
 
     ngOnInit() { }
 
-    subtract(index): void {
-        if (this.number[index] > 1) this.number[index]--;
+    private subtract(index): void {
+        if (this.numbers[index] > 1) this.numbers[index]--;
     }
 
-    add(index): void {
-        this.number[index]++;
+    private add(index): void {
+        this.numbers[index]++;
     }
 
-    getTokensWithWeights(): Object {
+    public getTokensWithWeights(): Object {
         let tokensMap: Object = {};
         for (var i in this.tokens) {
-            tokensMap[this.tokens[i]] = this.number[i];
+            tokensMap[this.tokens[i]] = this.numbers[i];
         }
 
         return tokensMap;
+    }
+
+    public initTokensNumbers(length: number): void {
+        this.numbers = Array(length).fill(1, 0, length);
+    }
+
+    public resetTokensSettings(): void {
+        this.numbers = [];
+    }
+
+    public resetTokens(): void {
+        this.tokens = [];
     }
 }

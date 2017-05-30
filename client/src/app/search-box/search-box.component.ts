@@ -3,9 +3,10 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { AppStore } from '../appStore/app.store';
 import * as watchers from '../appStore/app.store.watchers';
 
-import { SearchBody, SearchBodyWithWeights } from '../interfaces/common.interfaces';
+import { SearchBody, SearchBodyWithDecisionSupport, QueryWithDecisionSupport } from '../interfaces/common.interfaces';
 
 import { TokenComponent } from '../token/token.component';
+import { ArticleComponent } from '../article/article.component';
 
 @Component({
     selector: 'app-search-box',
@@ -16,11 +17,14 @@ import { TokenComponent } from '../token/token.component';
 export class SearchBoxComponent implements OnInit {
 
     private query: string;
+    private loading: boolean = false;
+    private pageLength: number = 10;
     articles: Object[] = [];
     tokens: string[] = [];
 
     @Input() currentAlgorithm;
-    @ViewChild('tokensComponent') tokensComponent: TokenComponent;
+    @ViewChild('tokenComponent') tokenComponent: TokenComponent;
+    @ViewChild('articleComponent') articleComponent: ArticleComponent;
 
     constructor(
         private appStore: AppStore
@@ -33,41 +37,61 @@ export class SearchBoxComponent implements OnInit {
         if (Object.keys(tokenWeights).length === 0 && tokenWeights.constructor === Object) {
             this.sendSearch();
         } else {
-            this.sendSearchWithWeights();
+            this.sendSearchWithDecisionSupport();
         }
     }
 
     private sendSearch(): void {
         const body: SearchBody = {
-            query: this.query,
+            queryText: this.query,
             sortingAlgorithm: this.currentAlgorithm,
         };
         this.watchArticles(body);
     }
 
-    private sendSearchWithWeights(): void {
-        const body: SearchBodyWithWeights = {
-            query: this.query,
-            sortingAlgorithm: this.currentAlgorithm,
+    private sendSearchWithDecisionSupport(): void {
+        const query: QueryWithDecisionSupport = {
+            queryText: this.query,
             weights: this.getTokenWeights(),
-            positiveArticles: [],
-            negativeArticles: []
+            positiveArticles: this.getPositiveArticles(),
+            negativeArticles: this.getNegativeArticles()
+        }
+        const body: SearchBodyWithDecisionSupport = {
+            query: query,
+            sortingAlgorithm: this.currentAlgorithm,
         };
-        this.watchArticlesWithWeights(body);
+        this.watchArticlesWithDecisionSupport(body);
     }
 
     private watchArticles(body: Object): void {
+        this.loading = true;
+        this.resetData();
+        this.resetSettings();
         watchers.watchArticles(this.appStore, body).subscribe(response => {
             this.articles = response.articles;
+            this.setPageArticles(0);
             this.tokens = this.getTokens(response.query.measureMap);
+            this.tokenComponent.initTokensNumbers(this.tokens.length);
+            this.loading = false;
         });
     }
 
-    private watchArticlesWithWeights(body: Object): void {
-        watchers.watchArticlesWithWeights(this.appStore, body).subscribe(response => {
+    private watchArticlesWithDecisionSupport(body: Object): void {
+        this.loading = true;
+        this.resetData();
+        watchers.watchArticlesWithDecisionSupport(this.appStore, body).subscribe(response => {
+            this.articleComponent.resetArticlesSettings();
             this.articles = response.articles;
+            this.setPageArticles(0);
             this.tokens = this.getTokens(response.query.measureMap);
+            this.loading = false;
         });
+    }
+
+    public setPageArticles(page: number): void {
+        this.articleComponent.setPageNumber(page);
+        const pageArticles = this.articles.slice(page, this.pageLength);
+        this.articleComponent.setPageArticles(pageArticles);
     }
 
     private getTokens(object: Object[]): string[] {
@@ -81,6 +105,29 @@ export class SearchBoxComponent implements OnInit {
     }
 
     private getTokenWeights(): Object {
-        return this.tokensComponent.getTokensWithWeights();
+        return this.tokenComponent.getTokensWithWeights();
+    }
+
+    private getPositiveArticles(): Object[] {
+        return this.articleComponent.getPositiveArticles();
+    }
+
+    private getNegativeArticles(): Object[] {
+        return this.articleComponent.getNegativeArticles();
+    }
+
+    private onKeyup(event): void {
+        this.resetData();
+        this.resetSettings();
+    }
+
+    private resetData(): void {
+        this.articleComponent.resetArticles();
+        this.tokenComponent.resetTokens();
+    }
+
+    private resetSettings(): void {
+        this.articleComponent.resetArticlesSettings();
+        this.tokenComponent.resetTokensSettings();
     }
 }

@@ -6,8 +6,8 @@ import { Http,  RequestOptions, URLSearchParams } from '@angular/http';
 @Injectable()
 export class AppAsyncs {
 
-    articlesUrl: string = 'v1/search/query';
-    articlesWithWeightsUrl: string = 'v1/search/term';
+    articlesUrl: string = 'v1/search';
+    articlesWithDecisionSupportUrl: string = 'v1/search/decision-support';
 
     constructor(
         private http: Http
@@ -18,8 +18,8 @@ export class AppAsyncs {
                         .map((res) => res.json());
     }
 
-    getArticlesWithWeights(body: Object): Observable<any> {
-        return this.http.post(this.articlesWithWeightsUrl, body)
+    getArticlesWithDecisionSupport(body: Object): Observable<any> {
+        return this.http.post(this.articlesWithDecisionSupportUrl, body)
                         .map((res) => res.json());
     }
 }
