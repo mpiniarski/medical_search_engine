@@ -7,7 +7,10 @@
 <div *ngIf="loading" class="mdl-cell mdl-cell--center mdl-cell--12-col">
     <mdl-spinner single-color [active]="loading"></mdl-spinner>
 </div>
-<app-token #tokenComponent [tokens]="tokens"></app-token>
-<div class="mdl-cell mdl-cell--center mdl-cell--12-col"></div>
-<div class="mdl-cell mdl-cell--center mdl-cell--12-col"></div>
-<app-article #articleComponent [articles]="articles" [pageLength]="pageLength"></app-article>
+<div *ngIf="emptyArticlesList" class="mdl-cell mdl-cell--center mdl-cell--12-col">
+    <p>{{emptyArticlesListLabel}}</p>
+</div>
+<app-token [hidden]="emptyArticlesList" #tokenComponent [tokens]="tokens"></app-token>
+<div [hidden]="emptyArticlesList" class="mdl-cell mdl-cell--center mdl-cell--12-col"></div>
+<div [hidden]="emptyArticlesList" class="mdl-cell mdl-cell--center mdl-cell--12-col"></div>
+<app-article [hidden]="emptyArticlesList" #articleComponent [articles]="articles" [pageLength]="pageLength"></app-article>
