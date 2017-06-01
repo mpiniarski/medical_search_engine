@@ -23,8 +23,8 @@ export class ArticleComponent implements OnInit {
 
     ngOnInit() { }
 
-    private isLastPage(): boolean {
-        return this.getLastPageNumber() === this.pageNumber;
+    private isSinglePage(): boolean {
+        return this.getLastPageNumber() === this.pageNumber && this.pageNumber === 0;
     }
 
     private getLastPageNumber(): number {

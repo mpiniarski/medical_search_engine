@@ -33,7 +33,7 @@
         </mdl-card-menu>
     </mdl-card>
 </div>
-<div [hidden]="!pageArticles.length || isLastPage()" class="mdl-cell mdl-cell--center mdl-cell--12-col">
+<div [hidden]="!pageArticles.length || isSinglePage()" class="mdl-cell mdl-cell--center mdl-cell--12-col">
     <button (click)="previousPage()" mdl-button mdl-ripple mdl-colored="primary">
         <mdl-icon>keyboard_arrow_left</mdl-icon>
     </button>
