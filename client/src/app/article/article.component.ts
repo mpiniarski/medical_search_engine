@@ -9,12 +9,12 @@ import { SearchBoxComponent } from '../search-box/search-box.component';
 })
 export class ArticleComponent implements OnInit {
 
-    private starred: boolean[] = [];
+    private states: boolean[] = [];
     private expand: boolean[] = [];
     private pageNumber: number = 0;
     private pageArticles: Object[] = [];
-    positiveArticles: Object[] = [];
-    negativeArticles: Object[] = [];
+    positiveArticles: Map<number, Object> = new Map();
+    negativeArticles: Map<number, Object> = new Map();
 
     @Input() articles;
     @Input() pageLength;
@@ -51,9 +51,9 @@ export class ArticleComponent implements OnInit {
         return this.expand[globalIndex];
     }
 
-    private isStarred(index: number): boolean {
+    private isStatePositive(index: number): boolean {
         const globalIndex = this.getGlobalIndex(index);
-        return this.starred[globalIndex];
+        return this.states[globalIndex];
     }
 
     private changePageArticles(pageNumber: number): void {
@@ -79,54 +79,50 @@ export class ArticleComponent implements OnInit {
 
     private ratePositive(index): void {
         const globalIndex = this.getGlobalIndex(index);
-        if (this.starred[globalIndex] !== true) {
-            if (this.starred[globalIndex] === false) {
-                const articleIndex = this.negativeArticles.indexOf(this.articles[globalIndex].measureMap);
-                this.negativeArticles.splice(articleIndex, 1);
+        if (this.states[globalIndex] !== true) {
+            if (this.states[globalIndex] === false) {
+                this.negativeArticles.delete(this.articles[globalIndex]);
             }
-            this.positiveArticles.push(this.articles[globalIndex].measureMap);
-            this.starred[globalIndex] = true;
+            this.positiveArticles.set(this.articles[globalIndex].article.id, this.articles[globalIndex].measureMap);
+            this.states[globalIndex] = true;
         }
     }
 
     private rateNegative(index): void {
         const globalIndex = this.getGlobalIndex(index);
-        if (this.starred[globalIndex] !== false) {
-            if (this.starred[globalIndex] === true) {
-                const articleIndex = this.positiveArticles.indexOf(this.articles[globalIndex].measureMap);
-                this.positiveArticles.splice(articleIndex, 1);
+        if (this.states[globalIndex] !== false) {
+            if (this.states[globalIndex] === true) {
+                this.positiveArticles.delete(this.articles[globalIndex]);
             }
-            this.negativeArticles.push(this.articles[globalIndex].measureMap);
-            this.starred[globalIndex] = false;
+            this.negativeArticles.set(this.articles[globalIndex].article.id, this.articles[globalIndex].measureMap);
+            this.states[globalIndex] = false;
         }
     }
 
     private rateNeutral(index): void {
         const globalIndex = this.getGlobalIndex(index);
-        if (this.starred[globalIndex] !== undefined) {
-            if (this.starred[globalIndex] === false) {
-                const articleIndex = this.negativeArticles.indexOf(this.articles[globalIndex].measureMap);
-                this.negativeArticles.splice(articleIndex, 1);
-            } else if (this.starred[globalIndex] === true) {
-                const articleIndex = this.positiveArticles.indexOf(this.articles[globalIndex].measureMap);
-                this.positiveArticles.splice(articleIndex, 1);
+        if (this.states[globalIndex] !== undefined) {
+            if (this.states[globalIndex] === false) {
+                this.negativeArticles.delete(this.articles[globalIndex]);
+            } else if (this.states[globalIndex] === true) {
+                this.positiveArticles.delete(this.articles[globalIndex]);
             }
-            this.starred[globalIndex] = undefined;
+            this.states[globalIndex] = undefined;
         }
     }
 
-    public getPositiveArticles(): Object[] {
+    public getPositiveArticles(): Map<number, Object> {
         return this.positiveArticles;
     }
 
-    public getNegativeArticles(): Object[] {
+    public getNegativeArticles(): Map<number, Object> {
         return this.negativeArticles;
     }
 
     public resetArticlesSettings(): void {
-        this.positiveArticles = [];
-        this.negativeArticles = [];
-        this.starred = [];
+        this.positiveArticles.clear();
+        this.negativeArticles.clear();
+        this.states = [];
         this.expand = [];
     }
 

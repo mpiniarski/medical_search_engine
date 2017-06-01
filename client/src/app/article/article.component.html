@@ -18,15 +18,15 @@
             <button [hidden]="!isExpanded(index)" (click)="expandArticle(index)" mdl-button mdl-colored="primary" mdl-ripple>View less</button>
         </mdl-card-actions>
         <mdl-card-menu>
-            <button (click)="rateNegative(index)" [class.rated-negative]="isStarred(index) === false" mdl-button mdl-button-type="icon"
+            <button (click)="rateNegative(index)" [class.rated-negative]="isStatePositive(index) === false" mdl-button mdl-button-type="icon"
                 mdl-ripple>
                 <mdl-icon>thumb_down</mdl-icon>
             </button>
-            <button (click)="rateNeutral(index)" [class.rated-neutral]="isStarred(index) === undefined" mdl-button mdl-button-type="icon"
+            <button (click)="rateNeutral(index)" [class.rated-neutral]="isStatePositive(index) === undefined" mdl-button mdl-button-type="icon"
                 mdl-ripple>
                 <mdl-icon>thumbs_up_down</mdl-icon>
             </button>
-            <button (click)="ratePositive(index)" [class.rated-positive]="isStarred(index)" mdl-button mdl-button-type="icon" mdl-ripple>
+            <button (click)="ratePositive(index)" [class.rated-positive]="isStatePositive(index)" mdl-button mdl-button-type="icon" mdl-ripple>
                 <mdl-icon>thumb_up</mdl-icon>
             </button>
             <p class="mdl-card__number-text">{{article.relevance | floatingPoint:7}}</p>

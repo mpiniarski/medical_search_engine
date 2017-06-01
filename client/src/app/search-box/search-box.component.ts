@@ -71,14 +71,14 @@ export class SearchBoxComponent implements OnInit {
         this.resetSettings();
         watchers.watchArticles(this.appStore, body).subscribe(response => {
             this.articles = response.articles;
-            if(!this.articles.length) {
+            if (!this.articles.length) {
                 this.emptyArticlesList = true;
             }
             this.setPageArticles(0);
             this.tokens = this.getTokens(response.query.measureMap);
             this.tokenComponent.initTokensNumbers(this.tokens.length);
             this.loading = false;
-        }, error => this.loading = false );
+        }, error => this.loading = false);
     }
 
     private watchArticlesWithDecisionSupport(body: Object): void {
@@ -87,13 +87,13 @@ export class SearchBoxComponent implements OnInit {
         watchers.watchArticlesWithDecisionSupport(this.appStore, body).subscribe(response => {
             this.articleComponent.resetArticlesSettings();
             this.articles = response.articles;
-            if(!this.articles.length) {
+            if (!this.articles.length) {
                 this.emptyArticlesList = true;
             }
             this.setPageArticles(0);
             this.tokens = this.getTokens(response.query.measureMap);
             this.loading = false;
-        }, error => this.loading = false );
+        }, error => this.loading = false);
     }
 
     public setPageArticles(page: number): void {
@@ -117,11 +117,25 @@ export class SearchBoxComponent implements OnInit {
     }
 
     private getPositiveArticles(): Object[] {
-        return this.articleComponent.getPositiveArticles();
+        const iter = this.articleComponent.getPositiveArticles().values();
+        const length = this.articleComponent.getPositiveArticles().size;
+        let articles: Object[] = [];
+        for (var i = 0; i < length; i++) {
+            articles.push(iter.next().value);
+        }
+
+        return articles;
     }
 
     private getNegativeArticles(): Object[] {
-        return this.articleComponent.getNegativeArticles();
+        const iter = this.articleComponent.getNegativeArticles().values();
+        const length = this.articleComponent.getNegativeArticles().size;
+        let articles: Object[] = [];
+        for (var i = 0; i < length; i++) {
+            articles.push(iter.next().value);
+        }
+
+        return articles;
     }
 
     private onKeyup(event): void {
