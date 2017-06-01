@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { DropdownObject } from '../interfaces/common.interfaces';
+
 @Component({
     selector: 'app-algorithm-dropdown',
     templateUrl: './algorithm-dropdown.component.html',
@@ -7,17 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlgorithmDropdownComponent implements OnInit {
 
-    private algorithms = ["TF", "TF-normalized", "TF-double title", "TF-IDF"];
-    private currentAlgorithm: string;
+    private algorithms: DropdownObject[] = [
+        { name: 'TF', code: 'TF' },
+        { name: 'TF boost title', code: 'TF_BOOST_TITLE' },
+        { name: 'TF squared', code: 'TF_SQUARED' },
+        { name: 'TF-IDF', code: 'TF_IDF' }
+    ]
+    private currentAlgorithm;
 
     constructor() { }
 
     ngOnInit() {
-        this.currentAlgorithm = this.algorithms[0];
+        this.currentAlgorithm = this.algorithms[0].code;
     }
-
-    getCurrentAlgorithm(): string {
-        return this.currentAlgorithm;
-    }
-
 }

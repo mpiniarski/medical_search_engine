@@ -1,5 +1,5 @@
 <div class="mdl-cell mdl-cell--center mdl-cell--12-col">
-    <mdl-textfield type="text" [(ngModel)]="query" (keyup)="onKeyup($event)" placeholder="Type Your query..." autofocus></mdl-textfield>
+    <mdl-textfield (keyup.enter)="search()" type="text" [(ngModel)]="query" (keyup)="onKeyup($event)" placeholder="Type Your query..." autofocus></mdl-textfield>
     <button (click)="search()" mdl-button mdl-button-type="fab" mdl-colored="accent" mdl-ripple mdl-button-type="mini-fab">
         <mdl-icon>search</mdl-icon>
     </button>

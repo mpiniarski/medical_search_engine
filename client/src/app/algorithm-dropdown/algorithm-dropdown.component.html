@@ -1,5 +1,6 @@
 <div class="mdl-cell mdl-cell--center mdl-cell--12-col">
     <mdl-select label="Algorithm" floating-label [(ngModel)]="currentAlgorithm">
-        <mdl-option *ngFor="let algorithm of algorithms" [value]="algorithm">{{algorithm}}</mdl-option>
+        <mdl-option *ngFor="let algorithm of algorithms" [value]="algorithm.code">{{algorithm.name}}</mdl-option>
     </mdl-select>
 </div>
+<app-search-box [currentAlgorithm]="currentAlgorithm"></app-search-box>

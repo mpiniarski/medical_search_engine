@@ -14,3 +14,8 @@ export interface QueryWithDecisionSupport {
     positiveArticles: Object[],
     negativeArticles: Object[]
 }
+
+export interface DropdownObject {
+    name: string,
+    code: string
+}
