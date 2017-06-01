@@ -36,6 +36,7 @@ export class ArticleComponent implements OnInit {
         if (lastPage > this.pageNumber) {
             this.pageNumber++;
             this.changePageArticles(this.pageNumber);
+            this.setPageArticleSettings(this.pageNumber);
         }
     }
 
@@ -43,6 +44,19 @@ export class ArticleComponent implements OnInit {
         if (this.pageNumber > 0) {
             this.pageNumber--;
             this.changePageArticles(this.pageNumber);
+            this.setPageArticleSettings(this.pageNumber);
+        }
+    }
+
+    private setPageArticleSettings(page: number): void {
+        const startIndex = page * this.pageLength;
+        const endIndex = (page + 1) * this.pageLength;
+        for (var i = startIndex; i < endIndex; i++) {
+            if (this.getPositiveArticles().has(this.articles[i].article.id)) {
+                this.setArticleDisplaySettings(i, true);
+            } else if (this.getNegativeArticles().has(this.articles[i].article.id)) {
+                this.setArticleDisplaySettings(i, false);
+            }
         }
     }
 
@@ -66,6 +80,10 @@ export class ArticleComponent implements OnInit {
 
     public setPageNumber(number: number): void {
         this.pageNumber = number;
+    }
+
+    public setArticleDisplaySettings(index: number, state: boolean): void {
+        this.states[index] = state;
     }
 
     private getGlobalIndex(index): number {
@@ -122,6 +140,9 @@ export class ArticleComponent implements OnInit {
     public resetArticlesSettings(): void {
         this.positiveArticles.clear();
         this.negativeArticles.clear();
+    }
+
+    public resetArticlesDisplaySettings(): void {
         this.states = [];
         this.expand = [];
     }
