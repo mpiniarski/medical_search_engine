@@ -99,7 +99,7 @@ export class ArticleComponent implements OnInit {
         const globalIndex = this.getGlobalIndex(index);
         if (this.states[globalIndex] !== true) {
             if (this.states[globalIndex] === false) {
-                this.negativeArticles.delete(this.articles[globalIndex]);
+                this.negativeArticles.delete(this.articles[globalIndex].article.id);
             }
             this.positiveArticles.set(this.articles[globalIndex].article.id, this.articles[globalIndex].measureMap);
             this.states[globalIndex] = true;
@@ -110,7 +110,7 @@ export class ArticleComponent implements OnInit {
         const globalIndex = this.getGlobalIndex(index);
         if (this.states[globalIndex] !== false) {
             if (this.states[globalIndex] === true) {
-                this.positiveArticles.delete(this.articles[globalIndex]);
+                this.positiveArticles.delete(this.articles[globalIndex].article.id);
             }
             this.negativeArticles.set(this.articles[globalIndex].article.id, this.articles[globalIndex].measureMap);
             this.states[globalIndex] = false;
@@ -121,9 +121,9 @@ export class ArticleComponent implements OnInit {
         const globalIndex = this.getGlobalIndex(index);
         if (this.states[globalIndex] !== undefined) {
             if (this.states[globalIndex] === false) {
-                this.negativeArticles.delete(this.articles[globalIndex]);
+                this.negativeArticles.delete(this.articles[globalIndex].article.id);
             } else if (this.states[globalIndex] === true) {
-                this.positiveArticles.delete(this.articles[globalIndex]);
+                this.positiveArticles.delete(this.articles[globalIndex].article.id);
             }
             this.states[globalIndex] = undefined;
         }

@@ -37,6 +37,7 @@
     <button (click)="previousPage()" mdl-button mdl-ripple mdl-colored="primary">
         <mdl-icon>keyboard_arrow_left</mdl-icon>
     </button>
+    <span>{{pageNumber}} / {{getLastPageNumber()}}</span>
     <button (click)="nextPage()" mdl-button mdl-ripple mdl-colored="primary">
         <mdl-icon>keyboard_arrow_right</mdl-icon>
     </button>
