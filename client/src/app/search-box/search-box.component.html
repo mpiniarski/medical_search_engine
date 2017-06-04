@@ -10,6 +10,9 @@
 <div *ngIf="emptyArticlesList" class="mdl-cell mdl-cell--center mdl-cell--12-col">
     <p>{{emptyArticlesListLabel}}</p>
 </div>
+<div *ngIf="serverError" class="mdl-cell mdl-cell--center mdl-cell--12-col">
+    <p>{{serverErrorLabel}}</p>
+</div>
 <app-token [hidden]="emptyArticlesList" #tokenComponent [tokens]="tokens"></app-token>
 <div [hidden]="emptyArticlesList" class="mdl-cell mdl-cell--center mdl-cell--12-col"></div>
 <div [hidden]="!displayResetButton || emptyArticlesList || loading" class="mdl-cell mdl-cell--center mdl-cell--12-col">

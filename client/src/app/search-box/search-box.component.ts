@@ -21,6 +21,8 @@ export class SearchBoxComponent implements OnInit {
     private pageLength: number = 10;
     private emptyArticlesList: boolean = false;
     private emptyArticlesListLabel: string = 'No results for Your query';
+    private serverError: boolean = false;
+    private serverErrorLabel: string = 'Something went wrong. We\'re sorry. Please Try again.';
     private displayResetButton: boolean = false;
     private resetButtonLabel: string = 'Reset support settings';
     articles: ArticleObject[] = [];
@@ -71,6 +73,7 @@ export class SearchBoxComponent implements OnInit {
 
     private watchArticles(body: Object): void {
         this.loading = true;
+        this.serverError = false;
         this.resetData();
         this.resetSettings();
         watchers.watchArticles(this.appStore, body).subscribe(response => {
@@ -83,11 +86,17 @@ export class SearchBoxComponent implements OnInit {
             this.tokenComponent.initTokensNumbers(this.tokens.length);
             this.displayResetButton = true;
             this.loading = false;
-        }, error => this.loading = false);
+        }, error => {
+            if(error.status === 500 || error.status === 504) {
+                this.serverError = true;
+            }
+            this.loading = false
+        });
     }
 
     private watchArticlesWithDecisionSupport(body: Object): void {
         this.loading = true;
+        this.serverError = false;
         this.resetData();
         watchers.watchArticlesWithDecisionSupport(this.appStore, body).subscribe(response => {
             this.articleComponent.resetArticlesDisplaySettings();
@@ -100,7 +109,12 @@ export class SearchBoxComponent implements OnInit {
             this.tokens = this.getTokens(response.query.measureMap);
             this.displayResetButton = true;
             this.loading = false;
-        }, error => this.loading = false);
+        }, error => {
+            if(error.status === 500 || error.status === 504) {
+                this.serverError = true;
+            }
+            this.loading = false
+        });
     }
 
     private setPageArticles(page: number): void {
@@ -161,6 +175,7 @@ export class SearchBoxComponent implements OnInit {
         this.resetData();
         this.resetSettings();
         this.displayResetButton = false;
+        this.serverError = false;
     }
 
     private resetData(): void {
