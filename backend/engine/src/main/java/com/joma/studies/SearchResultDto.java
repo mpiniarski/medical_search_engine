@@ -12,7 +12,7 @@ public class SearchResultDto {
 
     private SearchResultDto(QueryAnalysisDto query, List<RatedAndMeasuredArticleDto> articles) {
         this.query = query;
-        this.articles = articles.subList(0, ARTICLES_IS_RESULT-1);
+        this.articles = articles.subList(0, Math.min(ARTICLES_IS_RESULT, articles.size()));
         this.articleNumber = articles.size();
     }
 
