@@ -59,12 +59,11 @@ public class SearchEngine {
                                   List<MeasureMap> negativeArticleMeasureMaps,
                                   RelevanceSorter relevanceSorter) throws RepositoryException {
         MeasureMap queryMeasureMap = calculateQueryMeasureMap(queryText)
+                .normalize()
                 .rocchioTransform(ORIGINAL_MAP_WEIGHT,
                         positiveArticleMeasureMaps, POSITIVE_MAPS_WEIGHT,
                         negativeArticleMeasureMaps, NEGATIVE_MAPS_WEIGHT)
                 .riseWeights(weights);
-
-        queryMeasureMap.riseWeights(weights);
 
         QueryAnalysisDto queryAnalysisDto = new QueryAnalysisDto.Builder()
                 .withQuery(queryText)

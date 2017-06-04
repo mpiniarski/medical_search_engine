@@ -21,7 +21,7 @@ public class IdfMeasureCalculator {
 
         MeasureMap idfMeasureMap = new MeasureMap();
         termInNumberOfDocuments.forEach((key, value) ->
-                idfMeasureMap.put(key, Math.log(termLists.size() / value.doubleValue()))
+                idfMeasureMap.put(key, 1. + Math.log(termLists.size() / value.doubleValue()))
         );
         return idfMeasureMap;
     }

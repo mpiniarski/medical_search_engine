@@ -33,7 +33,7 @@ public class ArticleRepository {
             List<ArticleDto> result = new ArrayList<>();
             IndexReader indexReader = DirectoryReader.open(directory);
             IndexSearcher indexSearcher = new IndexSearcher(indexReader);
-            ScoreDoc[] hits = indexSearcher.search(repositoryQueryGenerator.generate(words), 1000)
+            ScoreDoc[] hits = indexSearcher.search(repositoryQueryGenerator.generate(words), Integer.MAX_VALUE)
                     .scoreDocs;
             for (ScoreDoc hit : hits) {
                 result.add(articleMapper.toArticleDto(

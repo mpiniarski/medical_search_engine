@@ -5,22 +5,28 @@ import com.joma.studies.article.relevance.dto.RatedAndMeasuredArticleDto;
 import java.util.List;
 
 public class SearchResultDto {
+    public static final int ARTICLES_IS_RESULT = 1000;
     private final QueryAnalysisDto query;
+    private final int articleNumber;
     private final List<RatedAndMeasuredArticleDto> articles;
 
     private SearchResultDto(QueryAnalysisDto query, List<RatedAndMeasuredArticleDto> articles) {
         this.query = query;
-        this.articles = articles;
+        this.articles = articles.subList(0, ARTICLES_IS_RESULT-1);
+        this.articleNumber = articles.size();
     }
 
     public QueryAnalysisDto getQuery() {
         return query;
     }
 
+    public int getArticleNumber() {
+        return articleNumber;
+    }
+
     public List<RatedAndMeasuredArticleDto> getArticles() {
         return articles;
     }
-
 
     public static final class Builder {
         private QueryAnalysisDto queryAnalysisDto;

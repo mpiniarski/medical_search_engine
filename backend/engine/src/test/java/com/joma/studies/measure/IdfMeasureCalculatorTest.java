@@ -40,15 +40,15 @@ public class IdfMeasureCalculatorTest {
 
 
         MeasureMap expectedMeasureMap = new MeasureMap();
-        expectedMeasureMap.put("never", 1.098726209);
-        expectedMeasureMap.put("game", 1.098726209);
-        expectedMeasureMap.put("life", 0.405507153);
-        expectedMeasureMap.put("everlast", 1.098726209);
-        expectedMeasureMap.put("learn", 0.405507153);
-        expectedMeasureMap.put("unexamin", 1.098726209);
-        expectedMeasureMap.put("worth", 1.098726209);
-        expectedMeasureMap.put("live", 1.098726209);
-        expectedMeasureMap.put("stop", 1.098726209);
+        expectedMeasureMap.put("never", 2.098726209);
+        expectedMeasureMap.put("game", 2.098726209);
+        expectedMeasureMap.put("life", 1.405507153);
+        expectedMeasureMap.put("everlast", 2.098726209);
+        expectedMeasureMap.put("learn", 1.405507153);
+        expectedMeasureMap.put("unexamin", 2.098726209);
+        expectedMeasureMap.put("worth", 2.098726209);
+        expectedMeasureMap.put("live", 2.098726209);
+        expectedMeasureMap.put("stop", 2.098726209);
 
         MeasureMap resultMeasureMap = measureCalculator.calculate(termLists);
 
