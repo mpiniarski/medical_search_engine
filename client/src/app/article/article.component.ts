@@ -40,9 +40,26 @@ export class ArticleComponent implements OnInit {
         }
     }
 
+    private lastPage(): void {
+        const lastPage = this.getLastPageNumber();
+        if (lastPage > this.pageNumber) {
+            this.pageNumber = lastPage;
+            this.changePageArticles(this.pageNumber);
+            this.setPageArticleSettings(this.pageNumber);
+        }
+    }
+
     private previousPage(): void {
         if (this.pageNumber > 0) {
             this.pageNumber--;
+            this.changePageArticles(this.pageNumber);
+            this.setPageArticleSettings(this.pageNumber);
+        }
+    }
+
+    private firstPage(): void {
+        if (this.pageNumber > 0) {
+            this.pageNumber = 0;
             this.changePageArticles(this.pageNumber);
             this.setPageArticleSettings(this.pageNumber);
         }

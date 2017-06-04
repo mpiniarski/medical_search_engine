@@ -34,11 +34,17 @@
     </mdl-card>
 </div>
 <div [hidden]="!pageArticles.length || isSinglePage()" class="mdl-cell mdl-cell--center mdl-cell--12-col">
+    <button (click)="firstPage()" mdl-button mdl-ripple mdl-colored="primary">
+        <mdl-icon>first_page</mdl-icon>
+    </button>
     <button (click)="previousPage()" mdl-button mdl-ripple mdl-colored="primary">
         <mdl-icon>keyboard_arrow_left</mdl-icon>
     </button>
     <span>{{pageNumber + 1}} / {{getLastPageNumber() + 1}}</span>
     <button (click)="nextPage()" mdl-button mdl-ripple mdl-colored="primary">
         <mdl-icon>keyboard_arrow_right</mdl-icon>
+    </button>
+    <button (click)="lastPage()" mdl-button mdl-ripple mdl-colored="primary">
+        <mdl-icon>last_page</mdl-icon>
     </button>
 </div>
