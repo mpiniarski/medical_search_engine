@@ -12,7 +12,7 @@
 </div>
 <app-token [hidden]="emptyArticlesList" #tokenComponent [tokens]="tokens"></app-token>
 <div [hidden]="emptyArticlesList" class="mdl-cell mdl-cell--center mdl-cell--12-col"></div>
-<div [hidden]="!displayResetButton || emptyArticlesList" class="mdl-cell mdl-cell--center mdl-cell--12-col">
+<div [hidden]="!displayResetButton || emptyArticlesList || loading" class="mdl-cell mdl-cell--center mdl-cell--12-col">
     <div class="mdl-cell--80">
         <button (click)="resetButton()" mdl-button mdl-button-type="raised" mdl-colored="primary" mdl-ripple>
             {{resetButtonLabel}}
