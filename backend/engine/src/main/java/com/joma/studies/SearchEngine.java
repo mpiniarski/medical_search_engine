@@ -19,8 +19,8 @@ import java.util.Set;
 public class SearchEngine {
 
     private static final double ORIGINAL_MAP_WEIGHT = 1.0;
-    private static final double POSITIVE_MAPS_WEIGHT = 0.8;
-    private static final double NEGATIVE_MAPS_WEIGHT = 0.1;
+    private static final double POSITIVE_MAPS_WEIGHT = 2.0;
+    private static final double NEGATIVE_MAPS_WEIGHT = 2.0;
 
     private final ArticleRepository articleRepository;
     private final TfMeasureCalculator tfMeasureCalculator;
