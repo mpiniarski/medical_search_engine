@@ -54,4 +54,4 @@ Uses Pubmed (https://www.ncbi.nlm.nih.gov/pubmed/) article base. You can downloa
     npm start
     ```
 ## Use ##
-9. Go to localhost:4200
+9. Open localhost:4200 in your browser
