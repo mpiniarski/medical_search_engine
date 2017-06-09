@@ -55,5 +55,3 @@ Uses Pubmed (https://www.ncbi.nlm.nih.gov/pubmed/) article base. You can downloa
     ```
 ## Use ##
 9. Go to localhost:4200
-
->>>>>>> Stashed changes
